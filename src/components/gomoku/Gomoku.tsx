@@ -33,7 +33,7 @@ const Gomoku = () => {
 
   return (
     <div>
-      <Card className="us-gomoku-card us-m-auto us-m-30px" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
+      <Card className="us-gomoku-card us-m-auto" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
         { RowElementList }
       </Card>
     </div>
