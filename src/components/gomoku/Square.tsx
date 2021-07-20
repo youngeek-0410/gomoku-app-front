@@ -13,10 +13,12 @@ function Square({ isUserBlack, x, y }: SquareProps) {
   const [img, setImg] = useState(gomokuDefault);
 
   const putPiece = () => {
-    if (isUserBlack) {
-      setImg(gomokuBlack);
-    } else {
-      setImg(gomokuWhite);
+    if (img == gomokuDefault) {
+      if (isUserBlack) {
+        setImg(gomokuBlack);
+      } else {
+        setImg(gomokuWhite);
+      }
     }
   };
 

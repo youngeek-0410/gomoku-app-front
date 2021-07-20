@@ -5,9 +5,9 @@ import Row from './Row';
 import './index.css';
 
 const squareCount: number = 19;
-var squareList: number[][] = new Array(squareCount);
+var squareList: boolean[][] = new Array(squareCount);
 for(let i = 0; i < squareCount; i++) {
-  squareList[i] = new Array(squareCount).fill(0);
+  squareList[i] = new Array(squareCount).fill(true);
 };
 
 
@@ -20,8 +20,13 @@ function Gomoku() {
   }
 
   const toggleUserBlack = (e: any) => {
-    console.log(e.target);
-    setIsUserBlack(!isUserBlack);
+    const clickedX: number = e.target.dataset.x;
+    const clickedY: number = e.target.dataset.y;
+
+    if(squareList[clickedX][clickedY]) {
+      setIsUserBlack(!isUserBlack);
+      squareList[clickedX][clickedY] = false;
+    }
   }
 
   return (
