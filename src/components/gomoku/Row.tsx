@@ -6,7 +6,7 @@ type RowProps = {
   y: number,
 }
 
-function Row({ isUserBlack, y }: RowProps) {
+const Row = ({ isUserBlack, y }: RowProps) => {
   const squareCount: number = 19;
   var SquareElementList: JSX.Element[] = new Array(squareCount);
   for(let x: number = 0; x < squareCount; x++) {

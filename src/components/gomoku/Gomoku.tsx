@@ -5,13 +5,15 @@ import Row from './Row';
 import './index.css';
 
 const squareCount: number = 19;
+
+// 碁が置かれていないか
 var squareList: boolean[][] = new Array(squareCount);
 for(let i = 0; i < squareCount; i++) {
   squareList[i] = new Array(squareCount).fill(true);
 };
 
 
-function Gomoku() {
+const Gomoku = () => {
   const [isUserBlack, setIsUserBlack] = useState(true);
 
   var RowElementList: JSX.Element[] = new Array(squareCount);
@@ -23,6 +25,7 @@ function Gomoku() {
     const clickedX: number = e.target.dataset.x;
     const clickedY: number = e.target.dataset.y;
 
+    // 碁が置かれていない時のみ有効
     if(squareList[clickedX][clickedY]) {
       setIsUserBlack(!isUserBlack);
       squareList[clickedX][clickedY] = false;
@@ -31,7 +34,7 @@ function Gomoku() {
 
   return (
     <div>
-      <Card className="us-gomoku-card us-m-auto us-m-30px" onClick={ (e: any) => toggleUserBlack(e) }>
+      <Card className="us-gomoku-card us-m-auto us-m-30px" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
         { RowElementList }
       </Card>
     </div>

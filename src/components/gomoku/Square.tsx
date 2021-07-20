@@ -9,10 +9,11 @@ type SquareProps = {
   y: number,
 }
 
-function Square({ isUserBlack, x, y }: SquareProps) {
+const Square = ({ isUserBlack, x, y }: SquareProps) => {
   const [img, setImg] = useState(gomokuDefault);
 
   const putPiece = () => {
+    // 碁が置かれていない時のみ有効
     if (img == gomokuDefault) {
       if (isUserBlack) {
         setImg(gomokuBlack);
