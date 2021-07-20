@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 
 import Row from './Row';
-import './index.css';
+import '../../scss/index.scss';
 
 const squareCount: number = 19;
 

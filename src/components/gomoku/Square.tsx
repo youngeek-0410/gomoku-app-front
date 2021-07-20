@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import gomokuDefault from './gomoku-default.png';
-import gomokuBlack from './gomoku-black.png';
-import gomokuWhite from './gomoku-white.png';
+import gomokuDefault from '../../assets/gomoku-default.png';
+import gomokuBlack from '../../assets/gomoku-black.png';
+import gomokuWhite from '../../assets/gomoku-white.png';
 
 type SquareProps = {
   isUserBlack: boolean,
