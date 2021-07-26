@@ -14,7 +14,7 @@ const Square = ({ isUserBlack, x, y }: SquareProps) => {
 
   const putPiece = () => {
     // 碁が置かれていない時のみ有効
-    if (img == gomokuDefault) {
+    if (img === gomokuDefault) {
       if (isUserBlack) {
         setImg(gomokuBlack);
       } else {

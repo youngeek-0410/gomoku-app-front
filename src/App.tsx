@@ -12,10 +12,10 @@ const App = () => {
       <Container>
         <div className="us-m-30px">
           <Row>
-            <Col lg={8}>
+            <Col lg={7}>
               <Gomoku></Gomoku>
             </Col>
-            <Col lg={4}>
+            <Col lg={5}>
               <Ranking></Ranking>
             </Col>
           </Row>
