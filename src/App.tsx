@@ -2,9 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import './scss/us_component.scss';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Gomoku from './components/gomoku/Gomoku';
-import Ranking from './components/ranking/Ranking';
+//import Home from './components/home/';
+import Gomoku from './components/Gomoku';
+import Ranking from './components/Ranking';
 
 const App = () => {
   return (
@@ -13,7 +15,9 @@ const App = () => {
         <div className="us-m-30px">
           <Row>
             <Col lg={7}>
-              <Gomoku></Gomoku>
+              <Router>
+                <Route path="/game" exact component={Gomoku}></Route>
+              </Router>
             </Col>
             <Col lg={5}>
               <Ranking></Ranking>
