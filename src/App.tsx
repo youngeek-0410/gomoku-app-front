@@ -1,14 +1,26 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap';
+import './scss/us_component.scss';
 
 import Gomoku from './components/gomoku/Gomoku';
-
-import './App.css';
+import Ranking from './components/ranking/Ranking';
 
 const App = () => {
   return (
     <div className="App">
-      <Gomoku></Gomoku>
+      <Container>
+        <div className="us-m-30px">
+          <Row>
+            <Col lg={7}>
+              <Gomoku></Gomoku>
+            </Col>
+            <Col lg={5}>
+              <Ranking></Ranking>
+            </Col>
+          </Row>
+        </div>
+      </Container>
     </div>
   );
 }

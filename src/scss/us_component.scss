@@ -1,7 +1,7 @@
 .us-gomoku-card {
-  width: 1000px;
-  height: 1000px;
-  background-image: url('./gomoku-background.jpg');
+  max-width: 1000px;
+  max-height: 1000px;
+  background-image: url('../assets/gomoku-background.jpg');
   border: 2px #000000 solid;
   border-radius: 10px;
 }
@@ -12,6 +12,13 @@
 
 .us-square {
   width: 5.26%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.us-square :hover {
+  opacity: 0.7;
+  background: #5a380442;
 }
 
 .us-w-100 {
