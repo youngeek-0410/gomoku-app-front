@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import Row from './Row';
 
@@ -36,6 +37,12 @@ const Gomoku = () => {
       <Card className="us-gomoku-card us-m-auto" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
         { RowElementList }
       </Card>
+
+      <div className="us-m-15px us-tar">
+        <Link to="/">
+          <Button variant="dark">ゲームを終了する</Button>
+        </Link>
+      </div>
     </div>
   );
 }

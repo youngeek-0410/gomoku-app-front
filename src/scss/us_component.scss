@@ -21,6 +21,12 @@
   background: #5a380442;
 }
 
+.us-l-btn {
+  height: 110px;
+  width: 280px;
+  font-size: 32px;
+  font-weight: 700;
+}
 .us-w-100 {
   width: 100%;
 }
@@ -34,6 +40,10 @@
   margin-left: auto;
 }
 
+.us-m-15px {
+  margin-top: 30px;
+}
+
 .us-m-30px {
   margin-top: 30px;
 }
@@ -41,4 +51,19 @@
 .us-d-flex {
   display: flex;
   height: 100%;
+}
+
+.us-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.us-tar {
+  text-align: right;
+}
+
+.us-tdn {
+  text-decoration: none;
 }
