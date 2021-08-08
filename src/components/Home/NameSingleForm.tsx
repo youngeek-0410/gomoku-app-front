@@ -1,10 +1,18 @@
 import react, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 const NameSingleForm = () => {
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const startBtnDisabled = (): boolean => {
     return name === '';
+  };
+  const handleStartClick = () => {
+    if(!startBtnDisabled()) {
+      history.push('/game');
+    }
   };
 
   return (
@@ -16,7 +24,7 @@ const NameSingleForm = () => {
           すでに存在するニックネームです。あなたは太郎ですか？
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" disabled={startBtnDisabled()}>
+      <Button variant="primary" disabled={startBtnDisabled()} onClick={() => handleStartClick()}>
         スタート
       </Button>
     </>

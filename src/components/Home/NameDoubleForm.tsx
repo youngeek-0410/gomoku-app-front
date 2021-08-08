@@ -1,12 +1,19 @@
 import react, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
 const NameDoubleForm = () => {
+  const history = useHistory();
+
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState('');
-
   const startBtnDisabled = (): boolean => {
     return !(name1 !== '' && name2 !== '');
+  };
+  const handleStartClick = () => {
+    if(!startBtnDisabled()) {
+      history.push('/game');
+    }
   };
 
   return (
@@ -25,7 +32,7 @@ const NameDoubleForm = () => {
           すでに存在する名前です。あなたは太郎ですか？
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" disabled={startBtnDisabled()}>
+      <Button variant="primary" disabled={startBtnDisabled()} onClick={() => handleStartClick()}>
         スタート
       </Button>
     </>
