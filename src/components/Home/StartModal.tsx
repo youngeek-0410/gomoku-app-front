@@ -1,5 +1,5 @@
 import react, { useState } from 'react';
-import { Modal, Tabs, Tab, Form, Button } from 'react-bootstrap';
+import { Modal, Tabs, Tab, Button } from 'react-bootstrap';
 
 import NameSingleForm from './NameSingleForm';
 import NameDoubleForm from './NameDoubleForm';
@@ -9,8 +9,6 @@ const StartModal = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const startBtnDisabled: boolean = true;
 
   return (
     <>
