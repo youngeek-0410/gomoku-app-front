@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Row from './Row';
 
-const squareCount: number = 19;
+export const squareCount: number = 15;
 
 // 碁が置かれていないか
 var squareList: boolean[][] = new Array(squareCount);
