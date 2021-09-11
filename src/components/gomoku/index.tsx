@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Row from './Row';
+import { useJadge } from "./hooks/useJadge";
 
 export const squareCount: number = 15;
 
@@ -28,6 +29,12 @@ const Gomoku = () => {
     // 碁が置かれていない時のみ有効
     if (clickedX && clickedY && squareList[clickedX][clickedY] === null) {
       squareList[clickedX][clickedY] = isUserBlack ? 0 : 1;
+
+      // 勝利判定
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      if (useJadge(squareList)) {
+        console.log("勝負あり")
+      }
       setIsUserBlack(!isUserBlack);
     }
   };
