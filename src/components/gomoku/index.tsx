@@ -18,7 +18,7 @@ const Gomoku = () => {
 
   var RowElementList: JSX.Element[] = new Array(squareCount);
   for(let y: number = 0; y < squareCount; y++) {
-    RowElementList.push(<Row isUserBlack={isUserBlack} y={y}></Row>);
+    RowElementList.push(<Row isUserBlack={isUserBlack} y={y} key={y}></Row>);
   }
 
   const toggleUserBlack = (e: any) => {
@@ -26,7 +26,8 @@ const Gomoku = () => {
     const clickedY: number = e.target.dataset.y;
 
     // 碁が置かれていない時のみ有効
-    if(squareList[clickedX][clickedY]) {
+    if(clickedX && clickedY && squareList[clickedX][clickedY]) {
+      console.log(clickedX, clickedY)
       setIsUserBlack(!isUserBlack);
       squareList[clickedX][clickedY] = false;
     }
