@@ -7,9 +7,9 @@ import Row from './Row';
 export const squareCount: number = 15;
 
 // 碁が置かれていないか
-var squareList: boolean[][] = new Array(squareCount);
+var squareList: number[][] = new Array(squareCount);
 for(let i = 0; i < squareCount; i++) {
-  squareList[i] = new Array(squareCount).fill(true);
+  squareList[i] = new Array(squareCount).fill(null);
 };
 
 
@@ -26,12 +26,11 @@ const Gomoku = () => {
     const clickedY: number = e.target.dataset.y;
 
     // 碁が置かれていない時のみ有効
-    if(clickedX && clickedY && squareList[clickedX][clickedY]) {
-      console.log(clickedX, clickedY)
+    if (clickedX && clickedY && squareList[clickedX][clickedY] === null) {
+      squareList[clickedX][clickedY] = isUserBlack ? 0 : 1;
       setIsUserBlack(!isUserBlack);
-      squareList[clickedX][clickedY] = false;
     }
-  }
+  };
 
   return (
     <div>
