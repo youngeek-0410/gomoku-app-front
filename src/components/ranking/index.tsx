@@ -41,7 +41,7 @@ const Ranking = () => {
   const RankingList: JSX.Element[] = [];
   for(var i in ranks) {
     RankingList.push(
-      <tr>
+      <tr key={`ranking${i}`}>
         <td>{ i }</td>
         <td>{ ranks[i].name }</td>
         <td>{ ranks[i].score }</td>

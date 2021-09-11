@@ -18,7 +18,7 @@ const Gomoku = () => {
 
   var RowElementList: JSX.Element[] = new Array(squareCount);
   for(let y: number = 0; y < squareCount; y++) {
-    RowElementList.push(<Row isUserBlack={isUserBlack} y={y}></Row>);
+    RowElementList.push(<Row isUserBlack={isUserBlack} y={y} key={y}></Row>);
   }
 
   const toggleUserBlack = (e: any) => {
