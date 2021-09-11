@@ -1,3 +1,5 @@
+$square-count: 15;
+
 .us-gomoku-card {
   max-width: 1000px;
   max-height: 1000px;
@@ -7,11 +9,11 @@
 }
 
 .us-row {
-  height: 5.26%;
+  height: 100% / $square-count;
 }
 
 .us-square {
-  width: 5.26%;
+  width: 100% / $square-count;
   cursor: pointer;
   transition: 0.5s;
 }
