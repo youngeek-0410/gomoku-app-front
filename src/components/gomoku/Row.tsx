@@ -1,5 +1,5 @@
 import React from 'react';
-import Square from './Square';
+import Square from './square';
 import { squareCount } from "./index";
 
 type RowProps = {

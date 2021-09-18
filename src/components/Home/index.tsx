@@ -1,6 +1,6 @@
-import react from 'react';
+import React from 'react';
 
-import StartModal from './StartModal';
+import StartModal from './startModal';
 
 const Home = () => {
   return (

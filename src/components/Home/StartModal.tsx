@@ -1,8 +1,8 @@
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Tabs, Tab, Button } from 'react-bootstrap';
 
-import NameSingleForm from './NameSingleForm';
-import NameDoubleForm from './NameDoubleForm';
+import NameSingleForm from './nameSingleForm';
+import NameDoubleForm from './nameDoubleForm';
 
 const StartModal = () => {
   const [show, setShow] = useState(false);

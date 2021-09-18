@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import Row from './Row';
+import Row from './row';
 import { useJadge } from "./hooks/useJadge";
 
 export const squareCount: number = 15;
