@@ -12,4 +12,4 @@ $ yarn start
 ```
 ## 依存リポジトリ
 - [五目並べCPU](https://github.com/m-star18/Gomoku-AI)
-- [サーバAPI](https://github.com/EngineeringDesign/webapp-group11)
+- [サーバAPI](https://github.com/Ichigo-dev/gomoku-app-server)
