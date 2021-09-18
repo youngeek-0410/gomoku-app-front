@@ -7,13 +7,17 @@ import { useSquareList } from "../context/squareListProvider";
 import { useJadge } from "../hooks/useJadge";
 import { SQUARE_COUNT } from "../squareCount";
 
+export type CurrentUser = 0 | 1;
+export type CurrentStatus = 0 | 1 | null;
+
 export const Board: React.FC = () => {
-  const [isUserBlack, setIsUserBlack] = useState(true);
+  const [currentUser, setCurrentUser] = useState<CurrentUser>(0);
   const squareList = useSquareList();
+  const [currentSquareList, setCurrentSquareaist] = useState<CurrentStatus[][]>(squareList);
 
   var RowElementList: JSX.Element[] = new Array(SQUARE_COUNT);
   for(let y: number = 0; y < SQUARE_COUNT; y++) {
-    RowElementList.push(<Row isUserBlack={isUserBlack} y={y} key={y}></Row>);
+    RowElementList.push(<Row currentSquareList={currentSquareList} y={y} key={y} />);
   }
 
   const toggleUserBlack = (e: any) => {
@@ -21,15 +25,18 @@ export const Board: React.FC = () => {
     const clickedY: number = e.target.dataset.y;
 
     // 碁が置かれていない時のみ有効
-    if (clickedX && clickedY && squareList[clickedX][clickedY] === null) {
-      squareList[clickedX][clickedY] = isUserBlack ? 0 : 1;
+    if (clickedX && clickedY && currentSquareList[clickedX][clickedY] === null) {
+      let nextCurrentSquareList = currentSquareList;
+      nextCurrentSquareList[clickedX][clickedY] = currentUser;
+      setCurrentSquareaist(nextCurrentSquareList);
 
       // 勝利判定
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      if (useJadge(squareList)) {
+      if (useJadge(currentSquareList)) {
         console.log("勝負あり");
       }
-      setIsUserBlack(!isUserBlack);
+      const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
+      setCurrentUser(nextCurrentUser);
     }
   };
 

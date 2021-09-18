@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { CurrentStatus } from "./board";
 import gomokuDefault from '../../../assets/gomoku-default.png';
 import gomokuBlack from '../../../assets/gomoku-black.png';
 import gomokuWhite from '../../../assets/gomoku-white.png';
 
 type SquareProps = {
-  isUserBlack: boolean;
+  currentStatus: CurrentStatus;
   x: number;
   y: number;
 };
 
-export const Square: React.FC<SquareProps> = ({ isUserBlack, x, y }) => {
+export const Square: React.FC<SquareProps> = ({ currentStatus, x, y }) => {
   const [img, setImg] = useState(gomokuDefault);
 
-  const putPiece = () => {
-    // 碁が置かれていない時のみ有効
-    if (img === gomokuDefault) {
-      if (isUserBlack) {
-        setImg(gomokuBlack);
-      } else {
-        setImg(gomokuWhite);
-      }
+  useEffect(() => {
+    // currentSquareListの副作用
+    if (currentStatus === 0) {
+      setImg(gomokuBlack);
+    } else if(currentStatus === 1){
+      setImg(gomokuWhite);
     }
-  };
+  }, [currentStatus]);
 
   return (
-    <div className="us-square" onClick={() => putPiece()}>
+    <div className="us-square">
       <img
         src={img}
         alt=""

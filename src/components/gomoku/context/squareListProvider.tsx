@@ -1,8 +1,10 @@
 import React, { createContext, useContext } from "react";
 
-export const SquareListContext = createContext<number[][] | null>(null);
+import { CurrentStatus } from "../components/board";
 
-export const SquareListProvider: React.FC<{ squareList: number[][] }> = ({
+export const SquareListContext = createContext<CurrentStatus[][] | null>(null);
+
+export const SquareListProvider: React.FC<{ squareList: CurrentStatus[][] }> = ({
   children,
   squareList,
 }) => {
