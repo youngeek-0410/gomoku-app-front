@@ -1,0 +1,1 @@
+export const SQUEARE_COUNT: number = 15

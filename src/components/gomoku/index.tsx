@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import Row from './row';
+import { Row } from './row';
+import { SqueareListProvider } from "./context/squeareListProvider";
 import { useJadge } from "./hooks/useJadge";
-
-export const squareCount: number = 15;
+import { SQUEARE_COUNT } from "./squeareCount";
 
 // 碁が置かれていないか
-var squareList: number[][] = new Array(squareCount);
-for(let i = 0; i < squareCount; i++) {
-  squareList[i] = new Array(squareCount).fill(null);
+var squareList: number[][] = new Array(SQUEARE_COUNT);
+for(let i = 0; i < SQUEARE_COUNT; i++) {
+  squareList[i] = new Array(SQUEARE_COUNT).fill(null);
 };
 
 
 const Gomoku = () => {
   const [isUserBlack, setIsUserBlack] = useState(true);
 
-  var RowElementList: JSX.Element[] = new Array(squareCount);
-  for(let y: number = 0; y < squareCount; y++) {
+  var RowElementList: JSX.Element[] = new Array(SQUEARE_COUNT);
+  for(let y: number = 0; y < SQUEARE_COUNT; y++) {
     RowElementList.push(<Row isUserBlack={isUserBlack} y={y} key={y}></Row>);
   }
 
@@ -40,7 +40,7 @@ const Gomoku = () => {
   };
 
   return (
-    <div>
+    <SqueareListProvider squeareList={squareList}>
       <Card className="us-gomoku-card us-m-auto" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
         { RowElementList }
       </Card>
@@ -50,7 +50,7 @@ const Gomoku = () => {
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </div>
-    </div>
+    </SqueareListProvider>
   );
 }
 

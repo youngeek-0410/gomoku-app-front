@@ -9,7 +9,7 @@ type SquareProps = {
   y: number;
 };
 
-const Square = ({ isUserBlack, x, y }: SquareProps) => {
+export const Square = ({ isUserBlack, x, y }: SquareProps) => {
   const [img, setImg] = useState(gomokuDefault);
 
   const putPiece = () => {
@@ -35,5 +35,3 @@ const Square = ({ isUserBlack, x, y }: SquareProps) => {
     </div>
   );
 };
-
-export default Square;
