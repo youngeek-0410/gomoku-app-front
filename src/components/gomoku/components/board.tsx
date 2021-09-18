@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Row } from './row';
 import { useSquareList } from "../context/squareListProvider";
 import { jadge } from "../common/jadge";
-import { SQUARE_COUNT } from "../squareCount";
 
 export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
@@ -14,11 +13,6 @@ export const Board: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>(0);
   const squareList = useSquareList();
   const [currentSquareList, setCurrentSquareaist] = useState<CurrentStatus[][]>(squareList);
-
-  var RowElementList: JSX.Element[] = new Array(SQUARE_COUNT);
-  for(let y: number = 0; y < SQUARE_COUNT; y++) {
-    RowElementList.push(<Row currentSquareList={currentSquareList} y={y} key={y} />);
-  }
 
   const onClickHandle = (e: any) => {
     const clickedX: number = e.target.dataset.x;
@@ -45,7 +39,9 @@ export const Board: React.FC = () => {
         className="us-gomoku-card us-m-auto"
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
-        {RowElementList}
+        {currentSquareList.map((v, x) => {
+          return <Row currentSquareRow={v} x={x} key={x} />;
+        })}
       </Card>
 
       <div className="us-m-15px us-tar">

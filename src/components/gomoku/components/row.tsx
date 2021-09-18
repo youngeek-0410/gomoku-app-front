@@ -1,20 +1,18 @@
 import React from "react";
 import { CurrentStatus } from "./board";
 import { Square } from "./square";
-import { SQUARE_COUNT } from "../squareCount";
 
 type RowProps = {
-  currentSquareList: CurrentStatus[][];
-  y: number;
+  currentSquareRow: CurrentStatus[];
+  x: number;
 };
 
-export const Row: React.FC<RowProps> = ({ currentSquareList, y }) => {
-  var SquareElementList: JSX.Element[] = new Array(SQUARE_COUNT);
-  for (let x: number = 0; x < SQUARE_COUNT; x++) {
-    SquareElementList.push(
-      <Square currentStatus={currentSquareList[x][y]} x={x} y={y} key={`${x}${y}`} />
-    );
-  }
-
-  return <div className="us-d-flex us-row">{SquareElementList}</div>;
+export const Row: React.FC<RowProps> = ({ currentSquareRow, x }) => {
+  return (
+    <div className="us-d-flex us-row">
+      {currentSquareRow.map((v, y) => {
+        return <Square currentStatus={v} x={x} y={y} key={`${x}${y}`} />;
+      })}
+    </div>
+  );
 };
