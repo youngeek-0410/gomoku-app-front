@@ -2,23 +2,17 @@ import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { Row } from './components/row';
-import { SqueareListProvider } from "./context/squeareListProvider";
-import { useJadge } from "./hooks/useJadge";
-import { SQUEARE_COUNT } from "./squeareCount";
-
-// 碁が置かれていないか
-var squareList: number[][] = new Array(SQUEARE_COUNT);
-for(let i = 0; i < SQUEARE_COUNT; i++) {
-  squareList[i] = new Array(SQUEARE_COUNT).fill(null);
-};
-
+import { Row } from './row';
+import { SquareListProvider, useSquareList } from "../context/squareListProvider";
+import { useJadge } from "../hooks/useJadge";
+import { SQUARE_COUNT } from "../squareCount";
 
 const Gomoku = () => {
   const [isUserBlack, setIsUserBlack] = useState(true);
+  const squareList = useSquareList();
 
-  var RowElementList: JSX.Element[] = new Array(SQUEARE_COUNT);
-  for(let y: number = 0; y < SQUEARE_COUNT; y++) {
+  var RowElementList: JSX.Element[] = new Array(SQUARE_COUNT);
+  for(let y: number = 0; y < SQUARE_COUNT; y++) {
     RowElementList.push(<Row isUserBlack={isUserBlack} y={y} key={y}></Row>);
   }
 
@@ -40,7 +34,7 @@ const Gomoku = () => {
   };
 
   return (
-    <SqueareListProvider squeareList={squareList}>
+    <SquareListProvider squareList={squareList}>
       <Card className="us-gomoku-card us-m-auto" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
         { RowElementList }
       </Card>
@@ -50,7 +44,7 @@ const Gomoku = () => {
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </div>
-    </SqueareListProvider>
+    </SquareListProvider>
   );
 }
 

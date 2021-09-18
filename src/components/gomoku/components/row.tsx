@@ -1,6 +1,6 @@
 import React from "react";
 import { Square } from "./square";
-import { SQUEARE_COUNT } from "./squeareCount";
+import { SQUARE_COUNT } from "../squareCount";
 
 type RowProps = {
   isUserBlack: boolean;
@@ -8,8 +8,8 @@ type RowProps = {
 };
 
 export const Row = ({ isUserBlack, y }: RowProps) => {
-  var SquareElementList: JSX.Element[] = new Array(SQUEARE_COUNT);
-  for (let x: number = 0; x < SQUEARE_COUNT; x++) {
+  var SquareElementList: JSX.Element[] = new Array(SQUARE_COUNT);
+  for (let x: number = 0; x < SQUARE_COUNT; x++) {
     SquareElementList.push(
       <Square isUserBlack={isUserBlack} x={x} y={y} key={`${x}${y}`}></Square>
     );
