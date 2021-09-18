@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { useHistory } from  'react-router';
 import { Link } from 'react-router-dom';
 
 import { Row } from './row';
@@ -13,6 +14,7 @@ export const Board: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>(0);
   const squareList = useSquareList();
   const [currentSquareList, setCurrentSquareaist] = useState<CurrentStatus[][]>(squareList);
+  const history = useHistory();
 
   const onClickHandle = (e: any) => {
     const clickedX: number = e.target.dataset.x;
@@ -26,8 +28,8 @@ export const Board: React.FC = () => {
 
       // 勝利判定
       if (jadge(currentSquareList)) {
-        console.log("勝負あり");
         alert("勝負あり");
+        history.push("/");
       }
       const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
       setCurrentUser(nextCurrentUser);
