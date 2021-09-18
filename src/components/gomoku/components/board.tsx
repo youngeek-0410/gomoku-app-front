@@ -27,6 +27,7 @@ export const Board: React.FC = () => {
       // 勝利判定
       if (jadge(currentSquareList)) {
         console.log("勝負あり");
+        alert("勝負あり");
       }
       const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
       setCurrentUser(nextCurrentUser);
