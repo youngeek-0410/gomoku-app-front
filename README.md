@@ -1,4 +1,8 @@
 # 五目並べ フロント部分
+[![Github issues](https://img.shields.io/github/issues/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app-front/issues)
+[![Github stars](https://img.shields.io/github/stars/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app-front/stargazers)
+[![Github top language](https://img.shields.io/github/languages/top/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app-front/)
+[![Github license](https://img.shields.io/github/license/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app/)
 ## 機能
 - 五目並べを2人でできる
 - 一人でもCPU相手に対戦できる
