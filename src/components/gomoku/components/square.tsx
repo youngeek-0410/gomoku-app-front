@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import gomokuDefault from '../../assets/gomoku-default.png';
-import gomokuBlack from '../../assets/gomoku-black.png';
-import gomokuWhite from '../../assets/gomoku-white.png';
+import gomokuDefault from '../../../assets/gomoku-default.png';
+import gomokuBlack from '../../../assets/gomoku-black.png';
+import gomokuWhite from '../../../assets/gomoku-white.png';
 
 type SquareProps = {
   isUserBlack: boolean;
@@ -9,7 +9,7 @@ type SquareProps = {
   y: number;
 };
 
-export const Square = ({ isUserBlack, x, y }: SquareProps) => {
+export const Square: React.FC<SquareProps> = ({ isUserBlack, x, y }) => {
   const [img, setImg] = useState(gomokuDefault);
 
   const putPiece = () => {

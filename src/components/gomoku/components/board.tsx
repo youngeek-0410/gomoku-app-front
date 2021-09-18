@@ -3,11 +3,11 @@ import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { Row } from './row';
-import { SquareListProvider, useSquareList } from "../context/squareListProvider";
+import { useSquareList } from "../context/squareListProvider";
 import { useJadge } from "../hooks/useJadge";
 import { SQUARE_COUNT } from "../squareCount";
 
-const Gomoku = () => {
+export const Board: React.FC = () => {
   const [isUserBlack, setIsUserBlack] = useState(true);
   const squareList = useSquareList();
 
@@ -27,16 +27,19 @@ const Gomoku = () => {
       // 勝利判定
       // eslint-disable-next-line react-hooks/rules-of-hooks
       if (useJadge(squareList)) {
-        console.log("勝負あり")
+        console.log("勝負あり");
       }
       setIsUserBlack(!isUserBlack);
     }
   };
 
   return (
-    <SquareListProvider squareList={squareList}>
-      <Card className="us-gomoku-card us-m-auto" onClick={ (e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e) }>
-        { RowElementList }
+    <>
+      <Card
+        className="us-gomoku-card us-m-auto"
+        onClick={(e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e)}
+      >
+        {RowElementList}
       </Card>
 
       <div className="us-m-15px us-tar">
@@ -44,8 +47,6 @@ const Gomoku = () => {
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </div>
-    </SquareListProvider>
+    </>
   );
 }
-
-export default Gomoku;

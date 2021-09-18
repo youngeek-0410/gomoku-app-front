@@ -7,7 +7,7 @@ export const SquareListProvider: React.FC<{ squareList: number[][] }> = ({
   squareList,
 }) => {
   return (
-    <SquareListContext.Provider value={squeareList}>
+    <SquareListContext.Provider value={squareList}>
       {children}
     </SquareListContext.Provider>
   );

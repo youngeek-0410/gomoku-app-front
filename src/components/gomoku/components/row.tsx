@@ -7,7 +7,7 @@ type RowProps = {
   y: number;
 };
 
-export const Row = ({ isUserBlack, y }: RowProps) => {
+export const Row: React.FC<RowProps> = ({ isUserBlack, y }) => {
   var SquareElementList: JSX.Element[] = new Array(SQUARE_COUNT);
   for (let x: number = 0; x < SQUARE_COUNT; x++) {
     SquareElementList.push(
