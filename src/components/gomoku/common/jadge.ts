@@ -1,6 +1,6 @@
 import { CurrentStatus } from "../components/board";
 
-export const useJadge  = (squareList: CurrentStatus[][]): boolean => {
+export const jadge  = (squareList: CurrentStatus[][]): boolean => {
   console.log(squareList);
   return false;
 };

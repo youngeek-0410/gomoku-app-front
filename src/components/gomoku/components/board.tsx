@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Row } from './row';
 import { useSquareList } from "../context/squareListProvider";
-import { useJadge } from "../hooks/useJadge";
+import { jadge } from "../common/jadge";
 import { SQUARE_COUNT } from "../squareCount";
 
 export type CurrentUser = 0 | 1;
@@ -20,7 +20,7 @@ export const Board: React.FC = () => {
     RowElementList.push(<Row currentSquareList={currentSquareList} y={y} key={y} />);
   }
 
-  const toggleUserBlack = (e: any) => {
+  const onClickHandle = (e: any) => {
     const clickedX: number = e.target.dataset.x;
     const clickedY: number = e.target.dataset.y;
 
@@ -31,8 +31,7 @@ export const Board: React.FC = () => {
       setCurrentSquareaist(nextCurrentSquareList);
 
       // 勝利判定
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      if (useJadge(currentSquareList)) {
+      if (jadge(currentSquareList)) {
         console.log("勝負あり");
       }
       const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
@@ -44,7 +43,7 @@ export const Board: React.FC = () => {
     <>
       <Card
         className="us-gomoku-card us-m-auto"
-        onClick={(e: React.MouseEvent<HTMLInputElement>) => toggleUserBlack(e)}
+        onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
         {RowElementList}
       </Card>
