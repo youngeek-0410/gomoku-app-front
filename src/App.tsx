@@ -4,9 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './scss/us_component.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Home from './components/Home';
-import Gomoku from './components/Gomoku';
-import Ranking from './components/Ranking';
+import Home from './components/home';
+import Gomoku from './components/gomoku/components/gomokuContainer';
+import Ranking from './components/ranking';
 
 const App = () => {
   return (
