@@ -27,17 +27,21 @@ export const Gomoku: React.FC = () => {
   // user_idが取得できない場合はホーム画面に飛ばす
   if (!user_id_1 || !user_id_2) history.push("/");
 
-  Promise.all([
-    client
-      .get(`/users/${user_id_1}`)
-      .then((v) => {
-        setUser1(v.data.user);
-      })
-      .catch((e) => {
-        if (e.statusCode === 404) {
-          history.push("/");
-        }
-      }),
+  client
+    .get(`/users/${user_id_1}`)
+    .then((v) => {
+      setUser1(v.data.user);
+      if(user_id_2 === "-1")
+        setUser2({ id: -1, name: "CPU" });
+    })
+    .catch((e) => {
+      if (e.statusCode === 404) {
+        history.push("/");
+      }
+    });
+  // CPUと対戦する場合
+  // user_id_2 === -1 はuser2がCPUであることを示す
+  if (user_id_2 !== "-1") {
     client
       .get(`/users/${user_id_2}`)
       .then((v) => {
@@ -47,8 +51,8 @@ export const Gomoku: React.FC = () => {
         if (e.statusCode === 404) {
           history.push("/");
         }
-      }),
-  ]);
+      });
+  }
 
   if (!user1 || !user2) {
     return (
