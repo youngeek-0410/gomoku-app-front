@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
+
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 
 export const NameDoubleForm: React.FC = () => {
   const history = useHistory();
   const client = useAxiosClient();
 
+  const [showOverray, setShowOverray] = useState<boolean>(false);
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState('');
   const [err, setErr] = useState('');
@@ -18,6 +20,7 @@ export const NameDoubleForm: React.FC = () => {
   };
   const handleStartClick = () => {
     if (!startBtnDisabled()) {
+      setShowOverray(true);
       Promise.all([
         client.post("/users", {
           name: name1,
@@ -30,16 +33,20 @@ export const NameDoubleForm: React.FC = () => {
         .then((v) => {
           if (v[0].data.err) {
             setErr1(v[0].data.err);
+            setShowOverray(false);
             return;
           }
           if (v[1].data.err) {
             setErr2(v[1].data.err);
+            setShowOverray(false);
             return;
           }
+          setShowOverray(false);
           history.push("/game");
         })
         .catch((e) => {
           setErr("ユーザ作成に失敗しました。時間をおいてお試しください。");
+          setShowOverray(false);
           return;
         });
     }
@@ -78,6 +85,8 @@ export const NameDoubleForm: React.FC = () => {
       >
         スタート
       </Button>
+      {showOverray && <div className="us-overray"></div>}
+      {showOverray && <Spinner animation="border" className="us-spinner" />}
     </>
   );
 };
