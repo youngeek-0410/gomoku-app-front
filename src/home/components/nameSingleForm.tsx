@@ -31,7 +31,7 @@ export const NameSingleForm: React.FC = () => {
             return;
           }
           setShowOverray(false);
-          history.push(`/game?user_id=${v.data.user.id}`);
+          history.push(`/game?user_id_1=${v.data.user.id}&user_id_2=-1`);
         })
         .catch(() => {
           setErr("ユーザ作成に失敗しました。時間をおいてお試しください。");
