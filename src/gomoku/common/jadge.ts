@@ -3,7 +3,7 @@ import { SQUARE_COUNT } from "../squareCount";
 
 export const jadge = (currentSquareList: CurrentStatus[][]): boolean => {
   // 勝利条件: 同じ色が 縦、横、斜め で5つ繋がった時
-  // 碁が置かれている場所のみ幅優先探索を用いて、判定を行う
+  // 碁が置かれている場所のみ深さ優先探索を用いて、判定を行う
   let res: boolean = false;
   currentSquareList.forEach((ss, x) => {
     ss.forEach((s, y) => {
@@ -13,7 +13,7 @@ export const jadge = (currentSquareList: CurrentStatus[][]): boolean => {
         chain = Math.max(chain, dfsCheck3(currentSquareList, s, x, y));
         chain = Math.max(chain, dfsCheck4(currentSquareList, s, x, y));
         if (chain > 4) {
-          res = res || true;
+          res = true;
         }
       }
     });
@@ -21,7 +21,10 @@ export const jadge = (currentSquareList: CurrentStatus[][]): boolean => {
   return res;
 };
 
-// 幅優先探索
+// 深さ優先探索
+// 左上, 上, 右上, 右 に対して
+// いくつ同じ色が繋がっているかを返す
+
 // 左上
 const dfsCheck1 = (
   currentSquareList: CurrentStatus[][],
