@@ -4,7 +4,7 @@ import { Board, CurrentStatus } from './board';
 import { SquareListProvider } from "../context/squareListProvider";
 import { SQUARE_COUNT } from "../squareCount";
 
-const Gomoku: React.FC = () => {
+export const Gomoku: React.FC = () => {
   // 黒: 0, 白: 1, なし: null
   var squareList: CurrentStatus[][] = new Array(SQUARE_COUNT);
   for (let i = 0; i < SQUARE_COUNT; i++) {
@@ -17,5 +17,3 @@ const Gomoku: React.FC = () => {
     </SquareListProvider>
   );
 };
-
-export default Gomoku;
