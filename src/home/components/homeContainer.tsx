@@ -1,8 +1,8 @@
 import React from 'react';
 
-import StartModal from './startModal';
+import { StartModal } from './startModal';
 
-const Home = () => {
+export const Home = () => {
   return (
     <>
       <div className="us-center">
@@ -11,5 +11,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;

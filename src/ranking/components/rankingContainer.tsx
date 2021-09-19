@@ -37,7 +37,7 @@ const ranks: Rank[] = [
   },
 ];
 
-const Ranking = () => {
+export const Ranking = () => {
   const RankingList: JSX.Element[] = [];
   for(var i in ranks) {
     RankingList.push(
@@ -74,5 +74,3 @@ const Ranking = () => {
 
   )
 };
-
-export default Ranking;

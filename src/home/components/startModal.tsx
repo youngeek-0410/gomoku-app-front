@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Modal, Tabs, Tab, Button } from 'react-bootstrap';
 
-import NameSingleForm from './nameSingleForm';
-import NameDoubleForm from './nameDoubleForm';
+import { NameSingleForm } from './nameSingleForm';
+import { NameDoubleForm } from './nameDoubleForm';
 
-const StartModal = () => {
+export const StartModal: React.FC = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -38,5 +38,3 @@ const StartModal = () => {
     </>
   );
 };
-
-export default StartModal;

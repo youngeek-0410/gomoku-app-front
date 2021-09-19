@@ -1,8 +1,8 @@
-import react, { useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 
-const NameDoubleForm = () => {
+export const NameDoubleForm: React.FC = () => {
   const history = useHistory();
 
   const [name1, setName1] = useState('');
@@ -38,5 +38,3 @@ const NameDoubleForm = () => {
     </>
   );
 };
-
-export default NameDoubleForm;
