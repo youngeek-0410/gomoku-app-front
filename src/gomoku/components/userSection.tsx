@@ -1,10 +1,14 @@
 import React from "react";
 
-export const UserSection: React.FC = () => {
+import { CurrentUser } from "./board";
+import { useUsers } from "../context/usersProvider";
+
+export const UserSection: React.FC<{currentUser: CurrentUser}> = ({currentUser}) => {
+    const users = useUsers();
     return (
         <>
-          <p>hogeの番です</p>
-          <p>先行: hoge 後攻: hoge</p>
+          <p>{users[currentUser].name}の番です</p>
+          <p>先行: {users[0].name} 後攻: {users[1].name}</p>
         </>
     )
 }

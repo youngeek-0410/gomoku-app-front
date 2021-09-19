@@ -95,7 +95,7 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
           return <Row currentSquareRow={v} x={x} key={x} />;
         })}
       </Card>
-      <UserSection />
+      <UserSection currentUser={currentUser} />
       <div className="us-m-15px us-tar">
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
