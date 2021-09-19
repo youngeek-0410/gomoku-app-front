@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
 import { useHistory } from  'react-router';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,6 @@ export const Board: React.FC = () => {
 
     const clickedX: number = e.target.dataset.x;
     const clickedY: number = e.target.dataset.y;
-    await delay(5000)
 
     // 碁が置かれていない時のみ有効
     if (
@@ -36,11 +35,14 @@ export const Board: React.FC = () => {
       let nextCurrentSquareList = currentSquareList;
       nextCurrentSquareList[clickedX][clickedY] = currentUser;
       setCurrentSquareaist(nextCurrentSquareList);
+      let isJadge: boolean = false;
 
-      // 勝利判定
-      const isJadge = await jadge(currentSquareList);
+      await Promise.all([jadge(currentSquareList), delay(200)]).then((v) => {
+        isJadge = v[0];
+      });
 
       if (isJadge) {
+        setShowOverray(false);
         alert("勝負あり");
         history.push("/");
       }
@@ -53,7 +55,6 @@ export const Board: React.FC = () => {
 
   return (
     <>
-      {showOverray && <div className="us-overray"></div>}
       <Card
         className="us-gomoku-card us-m-auto"
         style={{
@@ -61,6 +62,8 @@ export const Board: React.FC = () => {
         }}
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
+      {showOverray && <div className="us-overray"></div>}
+      {showOverray && <Spinner animation="border" className="us-spinner" />}
         {currentSquareList.map((v, x) => {
           return <Row currentSquareRow={v} x={x} key={x} />;
         })}
