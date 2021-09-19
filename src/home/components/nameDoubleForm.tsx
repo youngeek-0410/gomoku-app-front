@@ -42,7 +42,7 @@ export const NameDoubleForm: React.FC = () => {
             return;
           }
           setShowOverray(false);
-          history.push("/game");
+          history.push(`/game?user_id_1=${v[0].data.user.id}&user_id_2=${v[0].data.user.id}`);
         })
         .catch((e) => {
           setErr("ユーザ作成に失敗しました。時間をおいてお試しください。");
