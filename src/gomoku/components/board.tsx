@@ -21,7 +21,11 @@ export const Board: React.FC = () => {
     const clickedY: number = e.target.dataset.y;
 
     // 碁が置かれていない時のみ有効
-    if (clickedX && clickedY && currentSquareList[clickedX][clickedY] === null) {
+    if (
+      clickedX &&
+      clickedY &&
+      currentSquareList[clickedX][clickedY] === null
+    ) {
       let nextCurrentSquareList = currentSquareList;
       nextCurrentSquareList[clickedX][clickedY] = currentUser;
       setCurrentSquareaist(nextCurrentSquareList);
@@ -40,6 +44,9 @@ export const Board: React.FC = () => {
     <>
       <Card
         className="us-gomoku-card us-m-auto"
+        style={{
+          background: `url(${process.env.PUBLIC_URL}/gomoku-background.jpg)`,
+        }}
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
         {currentSquareList.map((v, x) => {

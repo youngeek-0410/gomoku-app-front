@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import { CurrentStatus } from "./board";
-import gomokuDefault from '../../assets/gomoku-default.png';
-import gomokuBlack from '../../assets/gomoku-black.png';
-import gomokuWhite from '../../assets/gomoku-white.png';
+
+const gomokuDefault = `${process.env.PUBLIC_URL}/gomoku-default.png`;
+const gomokuBlack = `${process.env.PUBLIC_URL}/gomoku-black.png`;
+const gomokuWhite = `${process.env.PUBLIC_URL}/gomoku-white.png`;
 
 type SquareProps = {
   currentStatus: CurrentStatus;
