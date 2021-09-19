@@ -11,14 +11,21 @@ export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
 
 export const Board: React.FC = () => {
+  const [showOverray, setShowOverray] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<CurrentUser>(0);
   const squareList = useSquareList();
   const [currentSquareList, setCurrentSquareaist] = useState<CurrentStatus[][]>(squareList);
   const history = useHistory();
 
-  const onClickHandle = (e: any) => {
+  const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+
+  const onClickHandle = async (e: any) => {
+    // イベント中は画面を操作できないようにする
+    setShowOverray(true);
+
     const clickedX: number = e.target.dataset.x;
     const clickedY: number = e.target.dataset.y;
+    await delay(5000)
 
     // 碁が置かれていない時のみ有効
     if (
@@ -31,17 +38,22 @@ export const Board: React.FC = () => {
       setCurrentSquareaist(nextCurrentSquareList);
 
       // 勝利判定
-      if (jadge(currentSquareList)) {
+      const isJadge = await jadge(currentSquareList);
+
+      if (isJadge) {
         alert("勝負あり");
         history.push("/");
       }
       const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
       setCurrentUser(nextCurrentUser);
     }
+
+    setShowOverray(false);
   };
 
   return (
     <>
+      {showOverray && <div className="us-overray"></div>}
       <Card
         className="us-gomoku-card us-m-auto"
         style={{
