@@ -13,7 +13,7 @@ export const jadge = (currentSquareList: CurrentStatus[][]): boolean => {
         chain = Math.max(chain, dfsCheck3(currentSquareList, s, x, y));
         chain = Math.max(chain, dfsCheck4(currentSquareList, s, x, y));
         if (chain > 4) {
-          res = res || true;
+          res = true;
         }
       }
     });
