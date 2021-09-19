@@ -57,7 +57,7 @@ export const Gomoku: React.FC = () => {
   if (!user1 || !user2) {
     return (
       <SquareListProvider squareList={squareList}>
-        <Board />
+        <Board loading={true} />
       </SquareListProvider>
     );
   }
@@ -70,7 +70,7 @@ export const Gomoku: React.FC = () => {
   return (
     <UsersProvider users={users}>
       <SquareListProvider squareList={squareList}>
-        <Board />
+        <Board loading={false} />
       </SquareListProvider>
     </UsersProvider>
   );
