@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
+import { Col, Row } from "react-bootstrap";
 
 import { Board, CurrentStatus } from "./board";
 import { SquareListProvider } from "../context/squareListProvider";
@@ -7,6 +8,7 @@ import { UsersProvider, User } from "../context/usersProvider";
 import { SQUARE_COUNT } from "../squareCount";
 import { useQuery } from "../../common/hooks/useQuery";
 import { useAxiosClient } from "../../common/context/axiosClientProvider";
+import { Ranking } from "../../ranking/components/rankingContainer";
 
 export const Gomoku: React.FC = () => {
   const history = useHistory();
@@ -31,8 +33,7 @@ export const Gomoku: React.FC = () => {
     .get(`/users/${user_id_1}`)
     .then((v) => {
       setUser1(v.data.user);
-      if(user_id_2 === "-1")
-        setUser2({ id: -1, name: "CPU" });
+      if (user_id_2 === "-1") setUser2({ id: -1, name: "CPU" });
     })
     .catch((e) => {
       if (e.statusCode === 404) {
@@ -56,9 +57,16 @@ export const Gomoku: React.FC = () => {
 
   if (!user1 || !user2) {
     return (
-      <SquareListProvider squareList={squareList}>
-        <Board loading={true} />
-      </SquareListProvider>
+      <Row>
+        <Col lg={7}>
+          <SquareListProvider squareList={squareList}>
+            <Board loading={true} />
+          </SquareListProvider>
+        </Col>
+        <Col lg={5}>
+          <Ranking />
+        </Col>
+      </Row>
     );
   }
 
@@ -68,10 +76,17 @@ export const Gomoku: React.FC = () => {
   };
 
   return (
-    <UsersProvider users={users}>
-      <SquareListProvider squareList={squareList}>
-        <Board loading={false} />
-      </SquareListProvider>
-    </UsersProvider>
+    <Row>
+      <Col lg={7}>
+        <UsersProvider users={users}>
+          <SquareListProvider squareList={squareList}>
+            <Board loading={false} />
+          </SquareListProvider>
+        </UsersProvider>
+      </Col>
+      <Col lg={5}>
+        <Ranking />
+      </Col>
+    </Row>
   );
 };

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { Row } from './row';
 import { useSquareList } from "../context/squareListProvider";
-import { useUsers } from "../context/usersProvider";
+import { UserSection, UserSectionLoading } from "./userSection";
 import { jadge } from "../common/jadge";
 
 export type CurrentUser = 0 | 1;
@@ -18,7 +18,6 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
   const [currentSquareList, setCurrentSquareaist] =
     useState<CurrentStatus[][]>(squareList);
   const history = useHistory();
-
 
   const onClickHandle = async (e: any) => {
     const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -53,7 +52,7 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
     }
 
     setShowOverray(false);
-  };;
+  };
 
   if (loading) {
     return (
@@ -71,7 +70,7 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
             return <Row currentSquareRow={v} x={x} key={x} />;
           })}
         </Card>
-
+        <UserSectionLoading />
         <div className="us-m-15px us-tar">
           <Link to="/">
             <Button variant="dark">ゲームを終了する</Button>
@@ -96,7 +95,7 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
           return <Row currentSquareRow={v} x={x} key={x} />;
         })}
       </Card>
-
+      <UserSection />
       <div className="us-m-15px us-tar">
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
