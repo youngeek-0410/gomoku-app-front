@@ -11,9 +11,14 @@ import { Ranking } from "./ranking/components/rankingContainer";
 import { AxiosClientProvider } from "./common/context/axiosClientProvider";
 
 const App = () => {
+  if (!process.env.REACT_APP_GOMOKU_API_URL) {
+    throw Error("not found process.env.REACT_APP_GOMOKU_API_URL.");
+  }
+  fetch("http://localhost:3000/game_logs").then(r => console.log(r.json()))
   const client: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_GOMOKU_API_URL,
     timeout: 1000,
+    headers: {}
   });
   return (
     <AxiosClientProvider axiosClient={client}>
