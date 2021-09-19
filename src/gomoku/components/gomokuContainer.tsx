@@ -8,7 +8,7 @@ import { UsersProvider, User } from "../context/usersProvider";
 import { SQUARE_COUNT } from "../squareCount";
 import { useQuery } from "../../common/hooks/useQuery";
 import { useAxiosClient } from "../../common/context/axiosClientProvider";
-import { Ranking } from "../../ranking/components/rankingContainer";
+import { GameLog } from "../../gameLog/components/gameLogContainer";
 
 export const Gomoku: React.FC = () => {
   const history = useHistory();
@@ -20,6 +20,7 @@ export const Gomoku: React.FC = () => {
   for (let i = 0; i < SQUARE_COUNT; i++) {
     squareList[i] = new Array(SQUARE_COUNT).fill(null);
   }
+  console.log(JSON.stringify(squareList));
 
   const [user1, setUser1] = useState<User | null>(null);
   const [user2, setUser2] = useState<User | null>(null);
@@ -64,7 +65,7 @@ export const Gomoku: React.FC = () => {
           </SquareListProvider>
         </Col>
         <Col lg={5}>
-          <Ranking />
+          <GameLog />
         </Col>
       </Row>
     );
@@ -85,7 +86,7 @@ export const Gomoku: React.FC = () => {
         </UsersProvider>
       </Col>
       <Col lg={5}>
-        <Ranking />
+        <GameLog />
       </Col>
     </Row>
   );

@@ -37,7 +37,7 @@ const ranks: Rank[] = [
   },
 ];
 
-export const Ranking = () => {
+export const GameLog: React.FC = () => {
   const RankingList: JSX.Element[] = [];
   for(var i in ranks) {
     RankingList.push(

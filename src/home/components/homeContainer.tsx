@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ranking } from '../../ranking/components/rankingContainer';
+import { GameLog } from '../../gameLog/components/gameLogContainer';
 
 import { StartModal } from './startModal';
 
@@ -9,7 +9,7 @@ export const Home: React.FC = () => {
       <h1>五目並べゲーム</h1>
       <StartModal />
       <div className="us-m-30px">
-        <Ranking />
+        <GameLog />
       </div>
     </>
   );
