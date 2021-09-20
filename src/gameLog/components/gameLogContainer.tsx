@@ -1,76 +1,26 @@
-import React from 'react';
-import { Alert, Table } from 'react-bootstrap';
+import React, { useState } from "react";
 
-type Rank = {
-  name: string;
-  score: number;
-};
-
-const ranks: Rank[] = [
-  {
-    name: "ますたー",
-    score: 10000,
-  },
-  {
-    name: "ますたー",
-    score: 1000,
-  },
-  {
-    name: "ますたー",
-    score: 100,
-  },
-  {
-    name: "ますたー",
-    score: 10,
-  },
-  {
-    name: "ますたー",
-    score: 5,
-  },
-  {
-    name: "ますたー",
-    score: 3,
-  },
-  {
-    name: "ますたー",
-    score: 1,
-  },
-];
+import { GameLogHeader } from "./gameLogHeader";
+import { GameLogTimeline } from "./gameLogTimeline";
+import { GameLogProvider, GameLogBody } from "../context/gameLogProvider";
+import { useAxiosClient } from "../../common/context/axiosClientProvider";
 
 export const GameLog: React.FC = () => {
-  const RankingList: JSX.Element[] = [];
-  for(var i in ranks) {
-    RankingList.push(
-      <tr key={`ranking${i}`}>
-        <td>{ i }</td>
-        <td>{ ranks[i].name }</td>
-        <td>{ ranks[i].score }</td>
-      </tr>
-    );
-  };
+  const client = useAxiosClient();
+
+  const [gameLogs, setGameLogs] = useState<GameLogBody[]>([]);
+  client
+    .get("/game_logs")
+    .then((v) => {
+      setGameLogs(v.data.game_logs);
+    })
+    .catch((e) => {
+    });
 
   return (
-    <>
-      <Alert variant="info">
-        <Alert.Heading>ランキング</Alert.Heading>
-        <p>
-          今までの勝利数のランキングを表示します。
-        </p>
-        <hr/>
-      </Alert>
-    <Table striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>名前</th>
-          <th>勝利数</th>
-        </tr>
-      </thead>
-      <tbody>
-        { RankingList }
-      </tbody>
-    </Table>
-    </>
-
-  )
+    <GameLogProvider gameLogs={gameLogs}>
+      <GameLogHeader />
+      <GameLogTimeline />
+    </GameLogProvider>
+  );
 };

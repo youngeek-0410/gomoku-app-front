@@ -20,7 +20,6 @@ export const Gomoku: React.FC = () => {
   for (let i = 0; i < SQUARE_COUNT; i++) {
     squareList[i] = new Array(SQUARE_COUNT).fill(null);
   }
-  console.log(JSON.stringify(squareList));
 
   const [user1, setUser1] = useState<User | null>(null);
   const [user2, setUser2] = useState<User | null>(null);
