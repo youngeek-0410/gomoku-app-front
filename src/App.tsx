@@ -21,7 +21,7 @@ const App: React.FC = () => {
   return (
     <AxiosClientProvider axiosClient={client}>
       <GlobalHeader />
-      <Container maxWidth="xl" sx={{marginTop: "52px"}}>
+      <Container maxWidth="xl" sx={{marginTop: "80px"}}>
         <Router>
           <Route path="/" exact component={Home}></Route>
           <Route path="/game" exact component={Gomoku}></Route>
