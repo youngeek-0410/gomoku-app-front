@@ -2,6 +2,7 @@ import React from 'react';
 import axios, { AxiosInstance } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Container from "@mui/material/Container";
 
 import { GlobalHeader } from "./common/components";
 import { Home } from './home/components/homeContainer';
@@ -20,10 +21,12 @@ const App: React.FC = () => {
   return (
     <AxiosClientProvider axiosClient={client}>
       <GlobalHeader />
-      <Router>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/game" exact component={Gomoku}></Route>
-      </Router>
+      <Container maxWidth="xl" sx={{marginTop: "52px"}}>
+        <Router>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/game" exact component={Gomoku}></Route>
+        </Router>
+      </Container>
     </AxiosClientProvider>
   );
 };
