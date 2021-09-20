@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Button, Spinner } from 'react-bootstrap';
+import styled from "styled-components";
+import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { Row } from './row';
@@ -9,6 +10,7 @@ import { UserSection, UserSectionLoading } from "./userSection";
 import { jadge } from "../common/jadge";
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 import { useQuery } from '../../common/hooks/useQuery';
+import { GlobalSpinner, GlobalOverray } from "../../common/components";
 
 export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
@@ -16,8 +18,8 @@ export type CurrentStatus = 0 | 1 | null;
 export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
   const client = useAxiosClient();
   const query = useQuery();
-  const userId1 = query.get("user_id_1")
-  const userId2 = query.get("user_id_2")
+  const userId1 = query.get("user_id_1");
+  const userId2 = query.get("user_id_2");
 
   const [showOverray, setShowOverray] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -89,28 +91,38 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
 
   return (
     <>
-      <Card
-        className="us-gomoku-card us-m-auto"
-        style={{
-          background: `url(${process.env.PUBLIC_URL}/gomoku-background.jpg)`,
-        }}
+      <GomokuBoard
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
-        {showOverray && <div className="us-overray"></div>}
-        {showOverray && <Spinner animation="border" className="us-spinner" />}
+        {showOverray && <GlobalOverray />}
+        {showOverray && <GlobalSpinner animation="border" />}
         {currentSquareList.map((v, x) => {
           return <Row currentSquareRow={v} x={x} key={x} />;
         })}
-      </Card>
+      </GomokuBoard>
       {loading && <UserSectionLoading />}
       {!loading && <UserSection currentUser={currentUser} />}
-      <div className="us-m-15px us-tar">
+      <FinishButton>
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
-      </div>
+      </FinishButton>
 
       {!loading && <CompleteModal show={showModal} currentUser={currentUser} />}
     </>
   );
 };
+
+const GomokuBoard = styled(Card)`
+  background: url(${process.env.PUBLIC_URL}/gomoku-background.jpg);
+  margin: 0 auto;
+  max-width: 1000px;
+  max-height: 1000px;
+  border: 2px #000000 solid;
+  border-radius: 10px;
+`;
+
+const FinishButton = styled.div`
+  margin: 15px;
+  text-align: right;
+`;

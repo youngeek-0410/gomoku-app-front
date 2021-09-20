@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Form, Button, Spinner } from 'react-bootstrap';
 
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
+import { GlobalSpinner, GlobalOverray } from '../../common/components';
 
 export const NameDoubleForm: React.FC = () => {
   const history = useHistory();
@@ -85,8 +86,8 @@ export const NameDoubleForm: React.FC = () => {
       >
         スタート
       </Button>
-      {showOverray && <div className="us-overray"></div>}
-      {showOverray && <Spinner animation="border" className="us-spinner" />}
+      {showOverray && <GlobalOverray />}
+      {showOverray && <GlobalSpinner animation="border" />}
     </>
   );
 };
