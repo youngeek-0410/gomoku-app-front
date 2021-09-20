@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from "styled-components";
 
 import { CurrentStatus } from "./board";
 
@@ -19,20 +20,29 @@ export const Square: React.FC<SquareProps> = ({ currentStatus, x, y }) => {
     // currentSquareListの副作用
     if (currentStatus === 0) {
       setImg(gomokuBlack);
-    } else if(currentStatus === 1){
+    } else if (currentStatus === 1) {
       setImg(gomokuWhite);
     }
   }, [currentStatus]);
 
   return (
-    <div className="us-square">
-      <img
-        src={img}
-        alt=""
-        className="us-w-100 us-h-100"
-        data-x={x}
-        data-y={y}
-      />
-    </div>
+    <StyleSquare>
+      <SquareImg src={img} alt="" data-x={x} data-y={y} />
+    </StyleSquare>
   );
 };
+
+const StyleSquare = styled.div`
+  width: 100% / $square-count;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    opacity: 0.7;
+    background: #5a380442;
+  }
+`;
+
+const SquareImg = styled.img`
+  width: 100%;
+  height: 100%;
+`;
