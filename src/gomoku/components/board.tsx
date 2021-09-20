@@ -109,7 +109,7 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
         </Link>
       </div>
 
-      <CompleteModal show={showModal} />
+      {!loading && <CompleteModal show={showModal} currentUser={currentUser} />}
     </>
   );
 };
