@@ -11,11 +11,10 @@ export const GameLog: React.FC = () => {
   const [gameLogs, setGameLogs] = useState<GameLogBody[]>([]);
   client
     .get("/game_logs")
-    .then((v) => {
-      setGameLogs(v.data.game_logs);
+    .then(async (v) => {
+      await setGameLogs(v.data.game_logs);
     })
-    .catch((e) => {
-    });
+    .catch((e) => {});
 
   return (
     <GameLogProvider gameLogs={gameLogs}>
