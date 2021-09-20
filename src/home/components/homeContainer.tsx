@@ -1,14 +1,23 @@
 import React from 'react';
-import { GameLog } from '../../gameLog/components/gameLogContainer';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
-import { StartModal } from './startModal';
+import { StartModal } from "./startModal";
+import { GameLog } from "../../gameLog/components/gameLogContainer";
 
 export const Home: React.FC = () => {
   return (
     <>
-      <h1>五目並べゲーム</h1>
-      <StartModal />
-      <GameLog />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <StartModal />
+          </Grid>
+          <Grid item xs={4}>
+            <GameLog />
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 };
