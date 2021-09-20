@@ -14,7 +14,7 @@ export const CompleteModal: React.FC<{ show: boolean, currentUser: CurrentUser}>
   };
 
   return (
-    <Modal show={show}>
+    <Modal show={show} centered>
       <Modal.Header>
         <Modal.Title>Finish!!</Modal.Title>
       </Modal.Header>
