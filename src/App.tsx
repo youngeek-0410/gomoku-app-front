@@ -21,12 +21,10 @@ const App: React.FC = () => {
   return (
     <AxiosClientProvider axiosClient={client}>
       <Container>
-        <div className="us-m-30px">
-          <Router>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/game" exact component={Gomoku}></Route>
-          </Router>
-        </div>
+        <Router>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/game" exact component={Gomoku}></Route>
+        </Router>
       </Container>
     </AxiosClientProvider>
   );
