@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Row } from './row';
 import { CompleteModal } from './completeModal';
 import { useSquareList } from "../context/squareListProvider";
-import { UserSection, UserSectionLoading } from "./userSection";
+import { UserSection } from "./userSection";
 import { jadge } from "../common/jadge";
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 import { useQuery } from '../../common/hooks/useQuery';
@@ -15,7 +15,7 @@ import { GlobalSpinner, GlobalOverray } from "../../common/components";
 export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
 
-export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
+export const Board: React.FC = () => {
   const client = useAxiosClient();
   const query = useQuery();
   const userId1 = query.get("user_id_1");
@@ -53,32 +53,25 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
       });
 
       if (isJadge) {
-        if (userId2 === "-1") {
-          client
-            .post("/game_logs", { user_id: userId1, win_user: currentUser + 1 })
-            .then(() => {
-              setShowOverray(false);
-              setShowModal(true);
-            })
-            .catch(() => {
-              setShowOverray(false);
-              setShowModal(true);
+        try {
+          if (userId2 === "-1") {
+            await client.post("/game_logs", {
+              user_id: userId1,
+              win_user: currentUser + 1,
             });
-        } else {
-          client
-            .post("/game_logs", {
+          } else {
+            await client.post("/game_logs", {
               user_id_1: userId1,
               user_id_2: userId2,
               win_user: currentUser + 1,
-            })
-            .then(() => {
-              setShowOverray(false);
-              setShowModal(true);
-            })
-            .catch(() => {
-              setShowOverray(false);
-              setShowModal(true);
             });
+          }
+          setShowOverray(false);
+          setShowModal(true);
+        } catch {
+          // ゲームログが正常に保存できなかった場合でも処理は変わらない
+          setShowOverray(false);
+          setShowModal(true);
         }
       } else {
         const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
@@ -88,9 +81,9 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
 
     setShowOverray(false);
   };
-
   return (
     <>
+      {" "}
       <GomokuBoard
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
@@ -100,15 +93,13 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
           return <Row currentSquareRow={v} x={x} key={x} />;
         })}
       </GomokuBoard>
-      {loading && <UserSectionLoading />}
-      {!loading && <UserSection currentUser={currentUser} />}
+      <UserSection currentUser={currentUser} />
       <FinishButton>
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </FinishButton>
-
-      {!loading && <CompleteModal show={showModal} currentUser={currentUser} />}
+      <CompleteModal show={showModal} currentUser={currentUser} />
     </>
   );
 };

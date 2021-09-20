@@ -8,6 +8,7 @@ import { UsersProvider, User } from "../context/usersProvider";
 import { SQUARE_COUNT } from "../squareCount";
 import { useQuery } from "../../common/hooks/useQuery";
 import { useAxiosClient } from "../../common/context/axiosClientProvider";
+import { GlobalOverray, GlobalSpinner } from "../../common/components";
 import { GameLog } from "../../gameLog/components/gameLogContainer";
 
 export const Gomoku: React.FC = () => {
@@ -57,16 +58,10 @@ export const Gomoku: React.FC = () => {
 
   if (!user1 || !user2) {
     return (
-      <Row>
-        <Col lg={7}>
-          <SquareListProvider squareList={squareList}>
-            <Board loading={true} />
-          </SquareListProvider>
-        </Col>
-        <Col lg={5}>
-          <GameLog />
-        </Col>
-      </Row>
+      <>
+        <GlobalOverray />
+        <GlobalSpinner animation="border" />
+      </>
     );
   }
 
@@ -80,7 +75,7 @@ export const Gomoku: React.FC = () => {
       <Col lg={7}>
         <UsersProvider users={users}>
           <SquareListProvider squareList={squareList}>
-            <Board loading={false} />
+            <Board/>
           </SquareListProvider>
         </UsersProvider>
       </Col>
