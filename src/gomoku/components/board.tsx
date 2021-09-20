@@ -78,9 +78,10 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
               setShowModal(true);
             });
         }
+      } else {
+        const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
+        setCurrentUser(nextCurrentUser);
       }
-      const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
-      setCurrentUser(nextCurrentUser);
     }
 
     setShowOverray(false);
