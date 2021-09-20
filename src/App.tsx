@@ -1,8 +1,6 @@
 import React from 'react';
 import axios, { AxiosInstance } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container,} from 'react-bootstrap';
-import './scss/us_component.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Home } from './home/components/homeContainer';
@@ -20,12 +18,10 @@ const App: React.FC = () => {
   });
   return (
     <AxiosClientProvider axiosClient={client}>
-      <Container>
-        <Router>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/game" exact component={Gomoku}></Route>
-        </Router>
-      </Container>
+      <Router>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/game" exact component={Gomoku}></Route>
+      </Router>
     </AxiosClientProvider>
   );
 };
