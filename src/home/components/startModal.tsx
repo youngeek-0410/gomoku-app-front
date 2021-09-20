@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { Modal, Tabs, Tab, Button } from 'react-bootstrap';
 
 import { NameSingleForm } from './nameSingleForm';
@@ -12,22 +13,28 @@ export const StartModal: React.FC = () => {
 
   return (
     <>
-      <Button variant="success" className="us-l-btn" onClick={ () => handleShow() }>
+      <StartButton
+        variant="success"
+        onClick={() => handleShow()}
+      >
         ゲームを始める
-      </Button>
+      </StartButton>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>ゲームを始める</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Tabs defaultActiveKey="single" id="uncontrolled-tab-example" className="mb-3">
+          <StartTabs
+            defaultActiveKey="single"
+            id="uncontrolled-tab-example"
+          >
             <Tab eventKey="single" title="1人で遊ぶ">
               <NameSingleForm></NameSingleForm>
             </Tab>
             <Tab eventKey="double" title="2人で遊ぶ">
               <NameDoubleForm></NameDoubleForm>
             </Tab>
-          </Tabs>
+          </StartTabs>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -38,3 +45,14 @@ export const StartModal: React.FC = () => {
     </>
   );
 };
+
+const StartButton = styled(Button)`
+  height: 110px;
+  width: 280px;
+  font-size: 32px;
+  font-weight: 700;
+`;
+
+const StartTabs = styled(Tabs)`
+  margin-bottom: 1rem;
+`;

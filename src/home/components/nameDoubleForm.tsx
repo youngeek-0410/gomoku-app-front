@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { useHistory } from 'react-router-dom';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 import { GlobalSpinner, GlobalOverray } from '../../common/components';
@@ -55,7 +56,7 @@ export const NameDoubleForm: React.FC = () => {
 
   return (
     <>
-      <Form.Group className="mb-3" controlId="formName1">
+      <NameForm controlId="formName1">
         <Form.Label>ニックネーム（1人目）</Form.Label>
         <Form.Control
           type="text"
@@ -64,8 +65,8 @@ export const NameDoubleForm: React.FC = () => {
           onChange={(e) => setName1(e.target.value)}
         />
         <Form.Text className="alert-text">{err1}</Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formName2">
+      </NameForm>
+      <NameForm controlId="formName2">
         <Form.Label>ニックネーム（2人目）</Form.Label>
         <Form.Control
           type="text"
@@ -74,7 +75,7 @@ export const NameDoubleForm: React.FC = () => {
           onChange={(e) => setName2(e.target.value)}
         />
         <Form.Text className="alert-text">{err2}</Form.Text>
-      </Form.Group>
+      </NameForm>
 
       <Form.Group>
         <Form.Text className="alert-text">{err}</Form.Text>
@@ -91,3 +92,7 @@ export const NameDoubleForm: React.FC = () => {
     </>
   );
 };
+
+const NameForm = styled(Form.Group)`
+  margin-bottom: 1rem;
+`;

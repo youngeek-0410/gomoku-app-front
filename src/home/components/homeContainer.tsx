@@ -8,9 +8,8 @@ export const Home: React.FC = () => {
     <>
       <h1>五目並べゲーム</h1>
       <StartModal />
-      <div className="us-m-30px">
-        <GameLog />
-      </div>
+      <GameLog />
     </>
   );
 };
+
