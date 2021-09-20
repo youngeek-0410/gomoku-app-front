@@ -54,6 +54,8 @@ export const Board: React.FC = () => {
 
       if (isJadge) {
         try {
+          // CPUと対戦する場合
+          // user_id_2 === -1 はuser2がCPUであることを示す
           if (userId2 === "-1") {
             await client.post("/game_logs", {
               user_id: userId1,
@@ -66,13 +68,11 @@ export const Board: React.FC = () => {
               win_user: currentUser + 1,
             });
           }
-          setShowOverray(false);
-          setShowModal(true);
         } catch {
           // ゲームログが正常に保存できなかった場合でも処理は変わらない
-          setShowOverray(false);
-          setShowModal(true);
         }
+        setShowOverray(false);
+        setShowModal(true);
       } else {
         const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
         setCurrentUser(nextCurrentUser);

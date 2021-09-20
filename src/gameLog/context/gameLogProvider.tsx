@@ -2,6 +2,8 @@ import React, { createContext, useContext } from "react";
 
 export const GameLogContext = createContext<GameLogBody[] | null>(null);
 
+// TODO: covert to camel case
+// 現在はAPIレスポンスの形式に合わせている
 export type GameLogBody = {
   id: number;
   win_user: number;
