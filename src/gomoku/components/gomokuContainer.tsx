@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Col, Row } from "react-bootstrap";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 import { Board, CurrentStatus } from "./board";
 import { SquareListProvider } from "../context/squareListProvider";
@@ -71,17 +73,19 @@ export const Gomoku: React.FC = () => {
   };
 
   return (
-    <Row>
-      <Col lg={7}>
+<Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
         <UsersProvider users={users}>
           <SquareListProvider squareList={squareList}>
             <Board/>
           </SquareListProvider>
         </UsersProvider>
-      </Col>
-      <Col lg={5}>
-        <GameLog />
-      </Col>
-    </Row>
+          </Grid>
+          <Grid item xs={4}>
+            <GameLog />
+          </Grid>
+        </Grid>
+      </Box>
   );
 };

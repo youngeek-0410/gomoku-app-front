@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { CurrentUser } from "./board";
 import { useUsers } from "../context/usersProvider";
@@ -6,17 +7,13 @@ import { useUsers } from "../context/usersProvider";
 export const UserSection: React.FC<{currentUser: CurrentUser}> = ({currentUser}) => {
     const users = useUsers();
     return (
-        <>
-          <p>{users[currentUser].name}の番です</p>
-          <p>先行: {users[0].name} 後攻: {users[1].name}</p>
-        </>
+        <UserSectionContainer>
+          <p>{users[currentUser].name}の番です 先行: {users[0].name} 後攻: {users[1].name}</p>
+        </UserSectionContainer>
     )
 }
 
-export const UserSectionLoading: React.FC = () => {
-    return (
-        <>
-          <p>準備中...</p>
-        </>
-    )
-}
+const UserSectionContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
+`;

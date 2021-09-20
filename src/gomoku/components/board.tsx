@@ -82,8 +82,7 @@ export const Board: React.FC = () => {
     setShowOverray(false);
   };
   return (
-    <>
-      {" "}
+    <GomokuWrapper>
       <GomokuBoard
         onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
       >
@@ -94,21 +93,29 @@ export const Board: React.FC = () => {
         })}
       </GomokuBoard>
       <UserSection currentUser={currentUser} />
+      <CompleteModal show={showModal} currentUser={currentUser} />
       <FinishButton>
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </FinishButton>
-      <CompleteModal show={showModal} currentUser={currentUser} />
-    </>
+    </GomokuWrapper>
   );
 };
 
+const GomokuWrapper = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  padding: 30px 40px;
+  height: auto;
+  border: 3px solid #b8b8b8;
+  border-radius: 16px;
+`;
+
 const GomokuBoard = styled(Card)`
+  max-width: 700px;
   background: url(${process.env.PUBLIC_URL}/gomoku-background.jpg);
   margin: 0 auto;
-  max-width: 1000px;
-  max-height: 1000px;
   border: 2px #000000 solid;
   border-radius: 10px;
 `;
