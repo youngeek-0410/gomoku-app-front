@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -14,9 +15,8 @@ export const GameLogTimeline: React.FC = () => {
 
   if (gameLogs.length === 0) {
     return (
-      <>
-        <p>取得中...</p>
-        {[...Array(7)].map((_, i) => {
+      <ScrollavleContent>
+        {[...Array(10)].map((_, i) => {
           return (
             <Timeline key={i}>
               <TimelineItem>
@@ -39,11 +39,11 @@ export const GameLogTimeline: React.FC = () => {
             </Timeline>
           );
         })}
-      </>
+      </ScrollavleContent>
     );
   }
   return (
-    <>
+    <ScrollavleContent>
       {gameLogs.map((v, i) => {
         return (
           <Timeline key={i}>
@@ -72,7 +72,7 @@ export const GameLogTimeline: React.FC = () => {
           </Timeline>
         );
       })}
-    </>
+    </ScrollavleContent>
   );
 };
 
@@ -80,10 +80,15 @@ const formatDate = (format: string, dateString: string): string => {
   const date = new Date(dateString);
   const formatDate = format
     .replace(/yyyy/, `${date.getFullYear()}`)
-    .replace(/MM/, `${date.getMonth() + 1}`)
-    .replace(/dd/, `${date.getDate()}`)
-    .replace(/HH/, `${date.getHours()}`)
-    .replace(/mm/, `${date.getMinutes()}`);
+    .replace(/MM/, `0${date.getMonth() + 1}`.slice(-2))
+    .replace(/dd/, `0${date.getDate()}`.slice(-2))
+    .replace(/HH/, `0${date.getHours()}`.slice(-2))
+    .replace(/mm/, `0${date.getMinutes()}`.slice(-2));
 
   return formatDate;
 };
+
+const ScrollavleContent = styled.div`
+  overflow: scroll;
+  height: 55%;
+`;
