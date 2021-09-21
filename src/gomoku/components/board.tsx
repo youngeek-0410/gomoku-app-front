@@ -82,24 +82,26 @@ export const Board: React.FC = () => {
     setShowOverray(false);
   };
   return (
-    <GomokuWrapper>
-      <GomokuBoard
-        onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
-      >
-        {showOverray && <GlobalOverray />}
-        {showOverray && <GlobalSpinner animation="border" />}
-        {currentSquareList.map((v, x) => {
-          return <Row currentSquareRow={v} x={x} key={x} />;
-        })}
-      </GomokuBoard>
-      <UserSection currentUser={currentUser} />
-      <CompleteModal show={showModal} currentUser={currentUser} />
+    <>
+      <GomokuWrapper>
+        <GomokuBoard
+          onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
+        >
+          {showOverray && <GlobalOverray />}
+          {showOverray && <GlobalSpinner animation="border" />}
+          {currentSquareList.map((v, x) => {
+            return <Row currentSquareRow={v} x={x} key={x} />;
+          })}
+        </GomokuBoard>
+        <UserSection currentUser={currentUser} />
+        <CompleteModal show={showModal} currentUser={currentUser} />
+      </GomokuWrapper>
       <FinishButton>
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
       </FinishButton>
-    </GomokuWrapper>
+    </>
   );
 };
 
@@ -121,6 +123,7 @@ const GomokuBoard = styled(Card)`
 `;
 
 const FinishButton = styled.div`
-  margin: 15px;
+  width: 90%;
+  margin: 20px auto;
   text-align: right;
 `;
