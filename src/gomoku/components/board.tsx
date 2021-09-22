@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { Card, Button, Spinner } from 'react-bootstrap';
+import styled from "styled-components";
+import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { Row } from './row';
 import { CompleteModal } from './completeModal';
 import { useSquareList } from "../context/squareListProvider";
-import { UserSection, UserSectionLoading } from "./userSection";
+import { UserSection } from "./userSection";
 import { jadge } from "../common/jadge";
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 import { useQuery } from '../../common/hooks/useQuery';
+import { GlobalSpinner, GlobalOverray } from "../../common/components";
 
 export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
 
-export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
+export const Board: React.FC = () => {
   const client = useAxiosClient();
   const query = useQuery();
-  const userId1 = query.get("user_id_1")
-  const userId2 = query.get("user_id_2")
+  const userId1 = query.get("user_id_1");
+  const userId2 = query.get("user_id_2");
 
   const [showOverray, setShowOverray] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -51,33 +53,26 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
       });
 
       if (isJadge) {
-        if (userId2 === "-1") {
-          client
-            .post("/game_logs", { user_id: userId1, win_user: currentUser + 1 })
-            .then(() => {
-              setShowOverray(false);
-              setShowModal(true);
-            })
-            .catch(() => {
-              setShowOverray(false);
-              setShowModal(true);
+        try {
+          // CPUと対戦する場合
+          // user_id_2 === -1 はuser2がCPUであることを示す
+          if (userId2 === "-1") {
+            await client.post("/game_logs", {
+              user_id: userId1,
+              win_user: currentUser + 1,
             });
-        } else {
-          client
-            .post("/game_logs", {
+          } else {
+            await client.post("/game_logs", {
               user_id_1: userId1,
               user_id_2: userId2,
               win_user: currentUser + 1,
-            })
-            .then(() => {
-              setShowOverray(false);
-              setShowModal(true);
-            })
-            .catch(() => {
-              setShowOverray(false);
-              setShowModal(true);
             });
+          }
+        } catch {
+          // ゲームログが正常に保存できなかった場合でも処理は変わらない
         }
+        setShowOverray(false);
+        setShowModal(true);
       } else {
         const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
         setCurrentUser(nextCurrentUser);
@@ -86,31 +81,49 @@ export const Board: React.FC<{ loading: boolean }> = ({ loading }) => {
 
     setShowOverray(false);
   };
-
   return (
     <>
-      <Card
-        className="us-gomoku-card us-m-auto"
-        style={{
-          background: `url(${process.env.PUBLIC_URL}/gomoku-background.jpg)`,
-        }}
-        onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
-      >
-        {showOverray && <div className="us-overray"></div>}
-        {showOverray && <Spinner animation="border" className="us-spinner" />}
-        {currentSquareList.map((v, x) => {
-          return <Row currentSquareRow={v} x={x} key={x} />;
-        })}
-      </Card>
-      {loading && <UserSectionLoading />}
-      {!loading && <UserSection currentUser={currentUser} />}
-      <div className="us-m-15px us-tar">
+      <GomokuWrapper>
+        <GomokuBoard
+          onClick={(e: React.MouseEvent<HTMLInputElement>) => onClickHandle(e)}
+        >
+          {showOverray && <GlobalOverray />}
+          {showOverray && <GlobalSpinner animation="border" />}
+          {currentSquareList.map((v, x) => {
+            return <Row currentSquareRow={v} x={x} key={x} />;
+          })}
+        </GomokuBoard>
+        <UserSection currentUser={currentUser} />
+        <CompleteModal show={showModal} currentUser={currentUser} />
+      </GomokuWrapper>
+      <FinishButton>
         <Link to="/">
           <Button variant="dark">ゲームを終了する</Button>
         </Link>
-      </div>
-
-      {!loading && <CompleteModal show={showModal} currentUser={currentUser} />}
+      </FinishButton>
     </>
   );
 };
+
+const GomokuWrapper = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  padding: 30px 40px;
+  height: auto;
+  border: 3px solid #b8b8b8;
+  border-radius: 16px;
+`;
+
+const GomokuBoard = styled(Card)`
+  max-width: 700px;
+  background: url(${process.env.PUBLIC_URL}/gomoku-background.jpg);
+  margin: 0 auto;
+  border: 2px #000000 solid;
+  border-radius: 10px;
+`;
+
+const FinishButton = styled.div`
+  width: 90%;
+  margin: 20px auto;
+  text-align: right;
+`;

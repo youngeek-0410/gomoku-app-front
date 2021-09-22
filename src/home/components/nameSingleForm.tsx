@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import styled from "styled-components";
+import { Form, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
+import { GlobalSpinner, GlobalOverray } from '../../common/components';
 
 export const NameSingleForm: React.FC = () => {
   const history = useHistory();
   const client = useAxiosClient();
 
   const [showOverray, setShowOverray] = useState<boolean>(false);
-  const [name, setName] = useState('');
-  const [err, setErr] = useState('');
-  const [err1, setErr1] = useState('');
+  const [name, setName] = useState("");
+  const [err, setErr] = useState("");
+  const [err1, setErr1] = useState("");
 
   const startBtnDisabled = (): boolean => {
     return name === "";
@@ -43,7 +45,7 @@ export const NameSingleForm: React.FC = () => {
 
   return (
     <>
-      <Form.Group className="mb-3" controlId="formName">
+      <NameForm controlId="formName">
         <Form.Label>ニックネーム</Form.Label>
         <Form.Control
           type="text"
@@ -52,7 +54,7 @@ export const NameSingleForm: React.FC = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <Form.Text className="alert-text">{err1}</Form.Text>
-      </Form.Group>
+      </NameForm>
       <Form.Group>
         <Form.Text className="alert-text">{err}</Form.Text>
       </Form.Group>
@@ -63,8 +65,12 @@ export const NameSingleForm: React.FC = () => {
       >
         スタート
       </Button>
-      {showOverray && <div className="us-overray"></div>}
-      {showOverray && <Spinner animation="border" className="us-spinner" />}
+      {showOverray && <GlobalOverray />}
+      {showOverray && <GlobalSpinner animation="border" />}
     </>
   );
 };
+
+const NameForm = styled(Form.Group)`
+  margin-bottom: 1rem;
+`;

@@ -1,6 +1,9 @@
 import React from "react";
+import styled from "styled-components";
+
 import { CurrentStatus } from "./board";
 import { Square } from "./square";
+import { SQUARE_COUNT } from "../squareCount";
 
 type RowProps = {
   currentSquareRow: CurrentStatus[];
@@ -9,10 +12,15 @@ type RowProps = {
 
 export const Row: React.FC<RowProps> = ({ currentSquareRow, x }) => {
   return (
-    <div className="us-d-flex us-row">
+    <SquareList>
       {currentSquareRow.map((v, y) => {
         return <Square currentStatus={v} x={x} y={y} key={`${x}${y}`} />;
       })}
-    </div>
+    </SquareList>
   );
 };
+
+const SquareList = styled.div`
+  display: flex;
+  height: 100% / ${SQUARE_COUNT};
+`;

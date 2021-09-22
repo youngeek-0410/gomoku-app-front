@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Col, Row } from "react-bootstrap";
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 import { Board, CurrentStatus } from "./board";
 import { SquareListProvider } from "../context/squareListProvider";
@@ -8,6 +10,7 @@ import { UsersProvider, User } from "../context/usersProvider";
 import { SQUARE_COUNT } from "../squareCount";
 import { useQuery } from "../../common/hooks/useQuery";
 import { useAxiosClient } from "../../common/context/axiosClientProvider";
+import { GlobalOverray, GlobalSpinner } from "../../common/components";
 import { GameLog } from "../../gameLog/components/gameLogContainer";
 
 export const Gomoku: React.FC = () => {
@@ -57,16 +60,10 @@ export const Gomoku: React.FC = () => {
 
   if (!user1 || !user2) {
     return (
-      <Row>
-        <Col lg={7}>
-          <SquareListProvider squareList={squareList}>
-            <Board loading={true} />
-          </SquareListProvider>
-        </Col>
-        <Col lg={5}>
-          <GameLog />
-        </Col>
-      </Row>
+      <>
+        <GlobalOverray />
+        <GlobalSpinner animation="border" />
+      </>
     );
   }
 
@@ -76,17 +73,19 @@ export const Gomoku: React.FC = () => {
   };
 
   return (
-    <Row>
-      <Col lg={7}>
+<Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
         <UsersProvider users={users}>
           <SquareListProvider squareList={squareList}>
-            <Board loading={false} />
+            <Board/>
           </SquareListProvider>
         </UsersProvider>
-      </Col>
-      <Col lg={5}>
-        <GameLog />
-      </Col>
-    </Row>
+          </Grid>
+          <Grid item xs={4}>
+            <GameLog />
+          </Grid>
+        </Grid>
+      </Box>
   );
 };

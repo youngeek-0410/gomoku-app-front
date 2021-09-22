@@ -1,10 +1,10 @@
 import React from 'react';
 import axios, { AxiosInstance } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container,} from 'react-bootstrap';
-import './scss/us_component.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Container from "@mui/material/Container";
 
+import { GlobalHeader } from "./common/components";
 import { Home } from './home/components/homeContainer';
 import { Gomoku } from "./gomoku/components/gomokuContainer";
 import { AxiosClientProvider } from "./common/context/axiosClientProvider";
@@ -20,13 +20,12 @@ const App: React.FC = () => {
   });
   return (
     <AxiosClientProvider axiosClient={client}>
-      <Container>
-        <div className="us-m-30px">
-          <Router>
-            <Route path="/" exact component={Home}></Route>
-            <Route path="/game" exact component={Gomoku}></Route>
-          </Router>
-        </div>
+      <GlobalHeader />
+      <Container maxWidth="xl" sx={{marginTop: "60px"}}>
+        <Router>
+          <Route path="/" exact component={Home}></Route>
+          <Route path="/game" exact component={Gomoku}></Route>
+        </Router>
       </Container>
     </AxiosClientProvider>
   );
