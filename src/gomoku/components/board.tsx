@@ -35,8 +35,9 @@ export const Board: React.FC = () => {
     const run = async () => {
       if (currentUser === 1 && userId2 === "-1") {
         setShowOverray(true);
+        const currentSquareListJson = JSON.stringify(currentSquareList);
         const { data } = await client.get(
-          "http://localhost:5000/gomoku/cpu?current_square_list=[[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]"
+          `${process.env.REACT_APP_GOMOKU_CPU_API_URL}/gomoku/cpu?current_square_list=${currentSquareListJson}`
         );
         await putPiece(data.x, data.y);
         setShowOverray(false);
