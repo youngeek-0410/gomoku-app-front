@@ -14,6 +14,6 @@ $ npm i -g yarn
 $ yarn install
 $ yarn start
 ```
-## Dependency repository
-- [五目並べCPU](https://github.com/m-star18/Gomoku-AI)
+## Dependent repository
+- [五目並べCPU](https://github.com/m-star18/Gomoku-api)
 - [サーバAPI](https://github.com/Ichigo-dev/gomoku-app-server)
