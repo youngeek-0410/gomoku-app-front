@@ -12,6 +12,7 @@
 $ sudo apt-get install nodejs
 $ npm i -g yarn
 $ yarn install
+# +@ .env.sampleをコピーして.envを作成し、依存リポジトリで`dockcer-compose up`すること
 $ yarn start
 ```
 ## Dependent repository
