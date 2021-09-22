@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Col, Row } from "react-bootstrap";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -32,31 +31,38 @@ export const Gomoku: React.FC = () => {
   // user_idが取得できない場合はホーム画面に飛ばす
   if (!user_id_1 || !user_id_2) history.push("/");
 
-  client
-    .get(`/users/${user_id_1}`)
-    .then((v) => {
-      setUser1(v.data.user);
-      if (user_id_2 === "-1") setUser2({ id: -1, name: "CPU" });
-    })
-    .catch((e) => {
-      if (e.statusCode === 404) {
-        history.push("/");
-      }
-    });
-  // CPUと対戦する場合
-  // user_id_2 === -1 はuser2がCPUであることを示す
-  if (user_id_2 !== "-1") {
+  useEffect(() => {
     client
-      .get(`/users/${user_id_2}`)
+      .get(`/users/${user_id_1}`)
       .then((v) => {
-        setUser2(v.data.user);
+        setUser1(v.data.user);
+        if (user_id_2 === "-1") setUser2({ id: -1, name: "CPU" });
       })
       .catch((e) => {
         if (e.statusCode === 404) {
           history.push("/");
         }
       });
-  }
+    // CPUと対戦する場合
+    // user_id_2 === -1 はuser2がCPUであることを示す
+    if (user_id_2 !== "-1") {
+      client
+        .get(`/users/${user_id_2}`)
+        .then((v) => {
+          setUser2(v.data.user);
+        })
+        .catch((e) => {
+          if (e.statusCode === 404) {
+            history.push("/");
+          }
+        });
+    }
+  });
+
+  const users = {
+    0: user1!,
+    1: user2!,
+  };
 
   if (!user1 || !user2) {
     return (
@@ -67,25 +73,20 @@ export const Gomoku: React.FC = () => {
     );
   }
 
-  const users = {
-    0: user1,
-    1: user2,
-  };
-
   return (
-<Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-        <UsersProvider users={users}>
-          <SquareListProvider squareList={squareList}>
-            <Board/>
-          </SquareListProvider>
-        </UsersProvider>
-          </Grid>
-          <Grid item xs={4}>
-            <GameLog />
-          </Grid>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <UsersProvider users={users}>
+            <SquareListProvider squareList={squareList}>
+              <Board />
+            </SquareListProvider>
+          </UsersProvider>
         </Grid>
-      </Box>
+        <Grid item xs={4}>
+          <GameLog />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };

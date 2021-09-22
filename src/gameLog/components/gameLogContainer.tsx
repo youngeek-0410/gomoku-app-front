@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { GameLogHeader } from "./gameLogHeader";
 import { GameLogTimeline } from "./gameLogTimeline";
@@ -7,14 +7,15 @@ import { useAxiosClient } from "../../common/context/axiosClientProvider";
 
 export const GameLog: React.FC = () => {
   const client = useAxiosClient();
-
   const [gameLogs, setGameLogs] = useState<GameLogBody[]>([]);
-  client
-    .get("/game_logs")
-    .then(async (v) => {
-      await setGameLogs(v.data.game_logs);
-    })
-    .catch((e) => {});
+  useEffect(() => {
+    client
+      .get("/game_logs")
+      .then((v) => {
+        setGameLogs(v.data.game_logs);
+      })
+      .catch(() => {});
+  }, [client]);
 
   return (
     <GameLogProvider gameLogs={gameLogs}>
