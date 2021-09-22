@@ -15,7 +15,7 @@ const App: React.FC = () => {
   }
   const client: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_GOMOKU_API_URL,
-    timeout: 1000,
+    timeout: 3000,
     headers: {},
   });
   return (

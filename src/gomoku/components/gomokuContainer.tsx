@@ -57,7 +57,7 @@ export const Gomoku: React.FC = () => {
           }
         });
     }
-  });
+  }, []);
 
   const users = {
     0: user1!,
