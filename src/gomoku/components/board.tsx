@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,8 @@ import { GlobalSpinner, GlobalOverray } from "../../common/components";
 export type CurrentUser = 0 | 1;
 export type CurrentStatus = 0 | 1 | null;
 
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 export const Board: React.FC = () => {
   const client = useAxiosClient();
   const query = useQuery();
@@ -29,8 +31,60 @@ export const Board: React.FC = () => {
   const [currentSquareList, setCurrentSquareaist] =
     useState<CurrentStatus[][]>(squareList);
 
+  useEffect(() => {
+    const run = async () => {
+      if (currentUser === 1 && userId2 === "-1") {
+        setShowOverray(true);
+        const currentSquareListJson = JSON.stringify(currentSquareList);
+        const { data } = await client.get(
+          `${process.env.REACT_APP_GOMOKU_CPU_API_URL}/gomoku/cpu?current_square_list=${currentSquareListJson}`
+        );
+        await putPiece(data.x, data.y);
+        setShowOverray(false);
+      }
+    };
+    run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
+
+  const putPiece = async (clickedX: number, clickedY: number) => {
+    let nextCurrentSquareList = currentSquareList;
+    nextCurrentSquareList[clickedX][clickedY] = currentUser;
+    setCurrentSquareaist(nextCurrentSquareList);
+    let isJadge: boolean = false;
+
+    await Promise.all([jadge(currentSquareList), delay(200)]).then((v) => {
+      isJadge = v[0];
+    });
+
+    if (isJadge) {
+      try {
+        // CPUと対戦する場合
+        // user_id_2 === -1 はuser2がCPUであることを示す
+        if (userId2 === "-1") {
+          await client.post("/game_logs", {
+            user_id: userId1,
+            win_user: currentUser + 1,
+          });
+        } else {
+          await client.post("/game_logs", {
+            user_id_1: userId1,
+            user_id_2: userId2,
+            win_user: currentUser + 1,
+          });
+        }
+      } catch {
+        // ゲームログが正常に保存できなかった場合でも処理は変わらない
+      }
+      setShowOverray(false);
+      setShowModal(true);
+    } else {
+      const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
+      setCurrentUser(nextCurrentUser);
+    }
+  };
+
   const onClickHandle = async (e: any) => {
-    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
     // イベント中は画面を操作できないようにする
     setShowOverray(true);
 
@@ -43,40 +97,7 @@ export const Board: React.FC = () => {
       clickedY &&
       currentSquareList[clickedX][clickedY] === null
     ) {
-      let nextCurrentSquareList = currentSquareList;
-      nextCurrentSquareList[clickedX][clickedY] = currentUser;
-      setCurrentSquareaist(nextCurrentSquareList);
-      let isJadge: boolean = false;
-
-      await Promise.all([jadge(currentSquareList), delay(200)]).then((v) => {
-        isJadge = v[0];
-      });
-
-      if (isJadge) {
-        try {
-          // CPUと対戦する場合
-          // user_id_2 === -1 はuser2がCPUであることを示す
-          if (userId2 === "-1") {
-            await client.post("/game_logs", {
-              user_id: userId1,
-              win_user: currentUser + 1,
-            });
-          } else {
-            await client.post("/game_logs", {
-              user_id_1: userId1,
-              user_id_2: userId2,
-              win_user: currentUser + 1,
-            });
-          }
-        } catch {
-          // ゲームログが正常に保存できなかった場合でも処理は変わらない
-        }
-        setShowOverray(false);
-        setShowModal(true);
-      } else {
-        const nextCurrentUser: CurrentUser = currentUser === 0 ? 1 : 0;
-        setCurrentUser(nextCurrentUser);
-      }
+      await putPiece(clickedX, clickedY);
     }
 
     setShowOverray(false);
