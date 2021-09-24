@@ -22,7 +22,7 @@ const App: React.FC = () => {
     <AxiosClientProvider axiosClient={client}>
       <GlobalHeader />
       <Container maxWidth="xl" sx={{marginTop: "60px"}}>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Route path="/" exact component={Home}></Route>
           <Route path="/game" exact component={Gomoku}></Route>
         </Router>
