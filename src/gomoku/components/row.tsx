@@ -7,13 +7,13 @@ import { SQUARE_COUNT } from "../squareCount";
 
 type RowProps = {
   currentSquareRow: CurrentStatus[];
-  x: number;
+  y: number;
 };
 
-export const Row: React.FC<RowProps> = ({ currentSquareRow, x }) => {
+export const Row: React.FC<RowProps> = ({ currentSquareRow, y }) => {
   return (
     <SquareList>
-      {currentSquareRow.map((v, y) => {
+      {currentSquareRow.map((v, x) => {
         return <Square currentStatus={v} x={x} y={y} key={`${x}${y}`} />;
       })}
     </SquareList>
