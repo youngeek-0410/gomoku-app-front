@@ -11,8 +11,8 @@ export const GameLog: React.FC = () => {
   useEffect(() => {
     client
       .get("/game_logs")
-      .then((v) => {
-        setGameLogs(v.data.game_logs);
+      .then(async (v) => {
+        setGameLogs(v.data);
       })
       .catch(() => {});
   }, [client]);
