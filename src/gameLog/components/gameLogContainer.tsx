@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import useSWR from "swr";
 
 import { GameLogHeader } from "./gameLogHeader";
 import { GameLogTimeline } from "./gameLogTimeline";
 import { GameLogProvider, GameLogBody } from "../context/gameLogProvider";
-import { useAxiosClient } from "../../common/context/axiosClientProvider";
+
+const fetcher = async () => {
+  const res = await fetch(`${process.env.REACT_APP_GOMOKU_API_URL}/game_logs`);
+  return await res.json();
+};
 
 export const GameLog: React.FC = () => {
-  const client = useAxiosClient();
-  const [gameLogs, setGameLogs] = useState<GameLogBody[]>([]);
-  useEffect(() => {
-    client
-      .get("/game_logs")
-      .then(async (v) => {
-        setGameLogs(v.data);
-      })
-      .catch(() => {});
-  }, [client]);
+  let { data } = useSWR<GameLogBody[]>("/gamelogs", fetcher);
+  if(!data) data = [];
 
   return (
-    <GameLogProvider gameLogs={gameLogs}>
+    <GameLogProvider gameLogs={data}>
       <GameLogHeader />
       <GameLogTimeline />
     </GameLogProvider>
