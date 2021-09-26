@@ -49,7 +49,7 @@ export const Board: React.FC = () => {
 
   const putPiece = async (clickedX: number, clickedY: number) => {
     let nextCurrentSquareList = currentSquareList;
-    nextCurrentSquareList[clickedX][clickedY] = currentUser;
+    nextCurrentSquareList[clickedY][clickedX] = currentUser;
     setCurrentSquareaist(nextCurrentSquareList);
     let isJadge: boolean = false;
 
@@ -95,7 +95,7 @@ export const Board: React.FC = () => {
     if (
       clickedX &&
       clickedY &&
-      currentSquareList[clickedX][clickedY] === null
+      currentSquareList[clickedY][clickedX] === null
     ) {
       await putPiece(clickedX, clickedY);
     }
@@ -110,8 +110,8 @@ export const Board: React.FC = () => {
         >
           {showOverray && <GlobalOverray />}
           {showOverray && <GlobalSpinner animation="border" />}
-          {currentSquareList.map((v, x) => {
-            return <Row currentSquareRow={v} x={x} key={x} />;
+          {currentSquareList.map((v, y) => {
+            return <Row currentSquareRow={v} y={y} key={y} />;
           })}
         </GomokuBoard>
         <UserSection currentUser={currentUser} />
