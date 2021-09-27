@@ -33,7 +33,7 @@ webブラウザで五目並べが1人、もしくは2人でプレイできる。
 言語はJavaで構成され、WebフレームワークとしてServletを利用して、
 ユーザ、対戦履歴をDBから取得しフロントに返す。
 
-高村・内藤が実装を担当。
+また、APIのプロトタイプとしてRailsで実装したものもある。
 
 ### フロントアプリ
 [リポジトリ](https://github.com/igsr5/gomoku-app-front)
@@ -49,8 +49,6 @@ webブラウザで五目並べが1人、もしくは2人でプレイできる。
 など
 
 言語はTypeScriptでフロントフレームワークとしてReactを採用している。
-
-市古が実装を担当。
 
 ### CPU Bot
 [リポジトリ](https://github.com/m-star18/Gomoku-api)
