@@ -4,6 +4,7 @@
 [![Github top language](https://img.shields.io/github/languages/top/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app-front/)
 [![Github license](https://img.shields.io/github/license/Ichigo-dev/gomoku-app-front)](https://github.com/Ichigo-dev/gomoku-app/)
 
+https://gomoku.igsr5.com
 
 webブラウザで五目並べが1人、もしくは2人でプレイできる。
 1人モードの場合はCPUと戦うことができる。
