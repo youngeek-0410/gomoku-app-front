@@ -1,8 +1,8 @@
 import React from "react";
 import useSWR from "swr";
 
-import { GameLogHeader } from "./gameLogHeader";
-import { GameLogTimeline } from "./gameLogTimeline";
+import { GameLogHeader } from "./GameLogHeader";
+import { GameLogTimeline } from "./GameLogTimeline";
 import { GameLogProvider, GameLogBody } from "../context/gameLogProvider";
 
 const fetcher = async () => {

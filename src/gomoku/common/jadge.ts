@@ -1,4 +1,4 @@
-import { CurrentStatus } from "../components/board";
+import { CurrentStatus } from "../components/Board";
 import { SQUARE_COUNT } from "../squareCount";
 
 export const jadge = (currentSquareList: CurrentStatus[][]): boolean => {

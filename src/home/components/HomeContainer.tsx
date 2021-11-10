@@ -2,8 +2,8 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { StartModal } from "./startModal";
-import { GameLog } from "../../gameLog/components/gameLogContainer";
+import { StartModal } from "./StartModal";
+import { GameLog } from "../../gameLog/components/GameLogContainer";
 
 export const Home: React.FC = () => {
   return (

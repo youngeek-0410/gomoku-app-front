@@ -6,8 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import { NameSingleForm } from "./nameSingleForm";
-import { NameDoubleForm } from "./nameDoubleForm";
+import { NameSingleForm } from "./NameSingleForm";
+import { NameDoubleForm } from "./NameDoubleForm";
 
 export const StartModal: React.FC = () => {
   const [show, setShow] = useState(false);

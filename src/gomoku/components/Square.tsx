@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
-import { CurrentStatus } from "./board";
+import { CurrentStatus } from "./Board";
 
 const gomokuDefault = `${process.env.PUBLIC_URL}/gomoku-default.png`;
 const gomokuBlack = `${process.env.PUBLIC_URL}/gomoku-black.png`;

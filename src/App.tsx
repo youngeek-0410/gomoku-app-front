@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Container from "@mui/material/Container";
 
 import { GlobalHeader } from "./common/components";
-import { Home } from './home/components/homeContainer';
-import { Gomoku } from "./gomoku/components/gomokuContainer";
+import { Home } from './home/components/HomeContainer';
+import { Gomoku } from "./gomoku/components/GomokuContainer";
 import { AxiosClientProvider } from "./common/context/axiosClientProvider";
 
 const App: React.FC = () => {
