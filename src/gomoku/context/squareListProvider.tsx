@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
 
-import { CurrentStatus } from "../components/board";
+import { CurrentStatus } from "../components/Board";
 
 export const SquareListContext = createContext<CurrentStatus[][] | null>(null);
 

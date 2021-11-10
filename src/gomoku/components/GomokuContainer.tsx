@@ -3,14 +3,14 @@ import { useHistory } from "react-router";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { Board, CurrentStatus } from "./board";
+import { Board, CurrentStatus } from "./Board";
 import { SquareListProvider } from "../context/squareListProvider";
 import { UsersProvider, User } from "../context/usersProvider";
 import { SQUARE_COUNT } from "../squareCount";
 import { useQuery } from "../../common/hooks/useQuery";
 import { useAxiosClient } from "../../common/context/axiosClientProvider";
 import { GlobalOverray, GlobalSpinner } from "../../common/components";
-import { GameLog } from "../../gameLog/components/gameLogContainer";
+import { GameLog } from "../../gameLog/components/GameLogContainer";
 
 export const Gomoku: React.FC = () => {
   const history = useHistory();

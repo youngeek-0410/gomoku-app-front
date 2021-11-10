@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CurrentStatus } from "./board";
-import { Square } from "./square";
+import { CurrentStatus } from "./Board";
+import { Square } from "./Square";
 import { SQUARE_COUNT } from "../squareCount";
 
 type RowProps = {

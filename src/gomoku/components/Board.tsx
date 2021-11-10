@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { Row } from './row';
-import { CompleteModal } from './completeModal';
+import { Row } from './Row';
+import { CompleteModal } from './CompleteModal';
 import { useSquareList } from "../context/squareListProvider";
-import { UserSection } from "./userSection";
+import { UserSection } from "./UserSection";
 import { jadge } from "../common/jadge";
 import { useAxiosClient } from '../../common/context/axiosClientProvider';
 import { useQuery } from '../../common/hooks/useQuery';

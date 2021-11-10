@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 import { useUsers } from "../context/usersProvider";
-import { CurrentUser } from "./board";
+import { CurrentUser } from "./Board";
 
 export const CompleteModal: React.FC<{ show: boolean, currentUser: CurrentUser}> = ({ show, currentUser }) => {
   const history = useHistory();
