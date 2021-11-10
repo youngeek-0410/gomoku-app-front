@@ -1,13 +1,11 @@
 import React from 'react';
 import axios, { AxiosInstance } from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Container from "@mui/material/Container";
 
 import { GlobalHeader } from "./common/components";
-import { Home } from './home/components/HomeContainer';
-import { Gomoku } from "./gomoku/components/GomokuContainer";
 import { AxiosClientProvider } from "./common/context/axiosClientProvider";
+import AppRouter from './AppRouter';
 
 const App: React.FC = () => {
   if (!process.env.REACT_APP_GOMOKU_API_URL) {
@@ -22,10 +20,7 @@ const App: React.FC = () => {
     <AxiosClientProvider axiosClient={client}>
       <GlobalHeader />
       <Container maxWidth="xl" sx={{marginTop: "60px"}}>
-        <Router basename={process.env.PUBLIC_URL}>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/game" exact component={Gomoku}></Route>
-        </Router>
+        <AppRouter />
       </Container>
     </AxiosClientProvider>
   );
